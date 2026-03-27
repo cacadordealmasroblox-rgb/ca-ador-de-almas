@@ -9,13 +9,21 @@
 <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
 <script>
   // ──────────────────────────────────────────────
-  // CONFIGURAÇÃO EMAILJS — preencha com seus dados
+  // CONFIGURAÇÃO EMAILJS
   // ──────────────────────────────────────────────
   const EMAILJS_PUBLIC_KEY  = 'SjCOaifN0P4oOUVUy';
   const EMAILJS_SERVICE_ID  = 'service_fbwv0ez';
-  const EMAILJS_TEMPLATE_ID = '3tgksvl';
+  const EMAILJS_TEMPLATE_ID = 'template_3tgksvl'; // ← CORRIGIDO
   // ──────────────────────────────────────────────
-  (function(){ emailjs.init({ publicKey: EMAILJS_PUBLIC_KEY }); })();
+
+  // Inicializa o EmailJS com tratamento de erro
+  (function(){
+    try {
+      emailjs.init({ publicKey: EMAILJS_PUBLIC_KEY });
+    } catch(e) {
+      console.error('Falha ao inicializar EmailJS:', e);
+    }
+  })();
 </script>
 <style>
 :root {
@@ -524,6 +532,12 @@ section {
   margin-top: 0.5rem;
 }
 
+.btn-submit:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none !important;
+}
+
 /* Status feedback */
 .form-status {
   display: none;
@@ -867,17 +881,13 @@ footer {
           <feMerge><feMergeNode in="coloredBlur"/><feMergeNode in="SourceGraphic"/></feMerge>
         </filter>
       </defs>
-      <!-- Outer ring -->
       <circle cx="70" cy="70" r="65" fill="none" stroke="#c9a227" stroke-width="1" opacity="0.5" filter="url(#glow)"/>
       <circle cx="70" cy="70" r="58" fill="none" stroke="#7a5f10" stroke-width="0.5" stroke-dasharray="4 3"/>
-      <!-- Inner geometric -->
       <polygon points="70,20 118,47 118,93 70,120 22,93 22,47" fill="none" stroke="#c9a227" stroke-width="1.2" opacity="0.7" filter="url(#glow)"/>
       <polygon points="70,35 105,55 105,85 70,105 35,85 35,55" fill="rgba(201,162,39,0.04)" stroke="#7a5f10" stroke-width="0.8"/>
-      <!-- Center eye -->
       <ellipse cx="70" cy="70" rx="18" ry="12" fill="none" stroke="#c9a227" stroke-width="1.2" filter="url(#glow)"/>
       <circle cx="70" cy="70" r="6" fill="rgba(201,162,39,0.3)" stroke="#c9a227" stroke-width="1" filter="url(#glow)"/>
       <circle cx="70" cy="70" r="2.5" fill="#c9a227" filter="url(#glow)"/>
-      <!-- Rune marks -->
       <line x1="70" y1="8" x2="70" y2="16" stroke="#c9a227" stroke-width="1.5" opacity="0.6"/>
       <line x1="70" y1="124" x2="70" y2="132" stroke="#c9a227" stroke-width="1.5" opacity="0.6"/>
       <line x1="8" y1="70" x2="16" y2="70" stroke="#c9a227" stroke-width="1.5" opacity="0.6"/>
@@ -1195,41 +1205,40 @@ footer {
 
   <div class="bug-layout">
     <div class="bug-form reveal">
-      <form id="bugForm" onsubmit="submitBug(event)">
-        <div class="form-group">
-          <label class="form-label" for="playerName">Seu Username no Roblox</label>
-          <input class="form-input" type="text" id="playerName" placeholder="ex: Caçadores de AlmasPlayer123" required>
-        </div>
-        <div class="form-group">
-          <label class="form-label" for="bugCategory">Categoria</label>
-          <select class="form-select" id="bugCategory" required>
-            <option value="" disabled selected>Selecione a categoria</option>
-            <option value="combate">⚔ Combate / Habilidades</option>
-            <option value="guilda">🏰 Sistema de Guilda</option>
-            <option value="mascara">😷 Máscaras</option>
-            <option value="poderes">🌀 Poderes / Expansão de Domínio</option>
-            <option value="missao">📜 Missões</option>
-            <option value="save">💾 Save / Dados perdidos</option>
-            <option value="pvp">⚔ Zona PVP</option>
-            <option value="performance">📉 Performance / Lag</option>
-            <option value="outro">🔧 Outro</option>
-          </select>
-        </div>
-        <div class="form-group">
-          <label class="form-label" for="bugTitle">Título do Bug</label>
-          <input class="form-input" type="text" id="bugTitle" placeholder="Resumo curto do problema" required>
-        </div>
-        <div class="form-group">
-          <label class="form-label" for="bugDesc">Descrição Detalhada</label>
-          <textarea class="form-textarea" id="bugDesc" placeholder="O que aconteceu? O que você estava fazendo? Acontece sempre ou às vezes?" required></textarea>
-        </div>
-        <div class="form-group">
-          <label class="form-label" for="bugSteps">Como Reproduzir (opcional)</label>
-          <textarea class="form-textarea" id="bugSteps" style="min-height:80px" placeholder="1. Fui até a zona PVP&#10;2. Usei o Haki do Rei&#10;3. O jogo travou"></textarea>
-        </div>
-        <button class="btn btn-gold btn-submit" type="submit">⚠ Enviar Report</button>
-        <div class="form-status" id="formStatus"></div>
-      </form>
+      <!-- Sem onsubmit no form — usamos o botão para evitar reload acidental -->
+      <div class="form-group">
+        <label class="form-label" for="playerName">Seu Username no Roblox</label>
+        <input class="form-input" type="text" id="playerName" placeholder="ex: CacadoresPlayer123">
+      </div>
+      <div class="form-group">
+        <label class="form-label" for="bugCategory">Categoria</label>
+        <select class="form-select" id="bugCategory">
+          <option value="" disabled selected>Selecione a categoria</option>
+          <option value="combate">⚔ Combate / Habilidades</option>
+          <option value="guilda">🏰 Sistema de Guilda</option>
+          <option value="mascara">😷 Máscaras</option>
+          <option value="poderes">🌀 Poderes / Expansão de Domínio</option>
+          <option value="missao">📜 Missões</option>
+          <option value="save">💾 Save / Dados perdidos</option>
+          <option value="pvp">⚔ Zona PVP</option>
+          <option value="performance">📉 Performance / Lag</option>
+          <option value="outro">🔧 Outro</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label class="form-label" for="bugTitle">Título do Bug</label>
+        <input class="form-input" type="text" id="bugTitle" placeholder="Resumo curto do problema">
+      </div>
+      <div class="form-group">
+        <label class="form-label" for="bugDesc">Descrição Detalhada</label>
+        <textarea class="form-textarea" id="bugDesc" placeholder="O que aconteceu? O que você estava fazendo? Acontece sempre ou às vezes?"></textarea>
+      </div>
+      <div class="form-group">
+        <label class="form-label" for="bugSteps">Como Reproduzir (opcional)</label>
+        <textarea class="form-textarea" id="bugSteps" style="min-height:80px" placeholder="1. Fui até a zona PVP&#10;2. Usei o Haki do Rei&#10;3. O jogo travou"></textarea>
+      </div>
+      <button class="btn btn-gold btn-submit" id="submitBtn" type="button" onclick="submitBug()">⚠ Enviar Report</button>
+      <div class="form-status" id="formStatus"></div>
     </div>
 
     <div class="bug-aside reveal">
@@ -1277,7 +1286,7 @@ footer {
 </footer>
 
 <script>
-// Scroll reveal
+// ── Scroll reveal ──
 const reveals = document.querySelectorAll('.reveal');
 const observer = new IntersectionObserver((entries) => {
   entries.forEach((entry, i) => {
@@ -1288,55 +1297,85 @@ const observer = new IntersectionObserver((entries) => {
 }, { threshold: 0.1 });
 reveals.forEach(el => observer.observe(el));
 
-// Bug form
-async function submitBug(e) {
-  e.preventDefault();
-  const btn    = document.querySelector('.btn-submit');
+// ── Mapa de categorias ──
+const categoryMap = {
+  combate:     '⚔ Combate / Habilidades',
+  guilda:      '🏰 Sistema de Guilda',
+  mascara:     '😷 Máscaras',
+  poderes:     '🌀 Poderes / Expansão de Domínio',
+  missao:      '📜 Missões',
+  save:        '💾 Save / Dados perdidos',
+  pvp:         '⚔ Zona PVP',
+  performance: '📉 Performance / Lag',
+  outro:       '🔧 Outro'
+};
+
+// ── Bug form submit ──
+async function submitBug() {
+  const btn    = document.getElementById('submitBtn');
   const status = document.getElementById('formStatus');
 
+  // Coleta e valida campos
   const playerName = document.getElementById('playerName').value.trim();
   const category   = document.getElementById('bugCategory').value;
   const title      = document.getElementById('bugTitle').value.trim();
   const desc       = document.getElementById('bugDesc').value.trim();
   const steps      = document.getElementById('bugSteps').value.trim() || 'Não informado';
 
-  // Mapa de categorias legíveis
-  const categoryMap = {
-    combate:'⚔ Combate / Habilidades', guilda:'🏰 Sistema de Guilda',
-    mascara:'😷 Máscaras', poderes:'🌀 Poderes / Expansão de Domínio',
-    missao:'📜 Missões', save:'💾 Save / Dados perdidos',
-    pvp:'⚔ Zona PVP', performance:'📉 Performance / Lag', outro:'🔧 Outro'
-  };
+  // Validação manual (sem form nativo para evitar reload)
+  if (!playerName) { showStatus('error', '✗ Preencha seu username no Roblox.'); return; }
+  if (!category)   { showStatus('error', '✗ Selecione a categoria do bug.'); return; }
+  if (!title)      { showStatus('error', '✗ Preencha o título do bug.'); return; }
+  if (!desc)       { showStatus('error', '✗ Descreva o bug em detalhes.'); return; }
 
+  // Desabilita botão durante o envio
   btn.textContent = '⏳ Enviando...';
   btn.disabled = true;
   status.className = 'form-status';
   status.textContent = '';
 
   try {
-    await emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, {
-      player_name : playerName,
-      category    : categoryMap[category] || category,
-      bug_title   : title,
-      bug_desc    : desc,
-      bug_steps   : steps,
-      sent_at     : new Date().toLocaleString('pt-BR', { timeZone: 'America/Sao_Paulo' })
-    });
+    const result = await emailjs.send(
+      EMAILJS_SERVICE_ID,
+      EMAILJS_TEMPLATE_ID,
+      {
+        player_name : playerName,
+        category    : categoryMap[category] || category,
+        bug_title   : title,
+        bug_desc    : desc,
+        bug_steps   : steps,
+        sent_at     : new Date().toLocaleString('pt-BR', { timeZone: 'America/Sao_Paulo' })
+      }
+    );
 
-    status.className = 'form-status success';
-    status.textContent = '✓ Report enviado! Obrigado, ' + playerName + '. Vamos investigar em breve.';
-    document.getElementById('bugForm').reset();
+    if (result.status === 200) {
+      showStatus('success', '✓ Report enviado! Obrigado, ' + playerName + '. Vamos investigar em breve.');
+      // Limpa os campos manualmente
+      document.getElementById('playerName').value  = '';
+      document.getElementById('bugCategory').value = '';
+      document.getElementById('bugTitle').value    = '';
+      document.getElementById('bugDesc').value     = '';
+      document.getElementById('bugSteps').value    = '';
+    } else {
+      throw new Error('Status inesperado: ' + result.status);
+    }
+
   } catch (err) {
     console.error('EmailJS error:', err);
-    status.className = 'form-status error';
-    status.textContent = '✗ Falha ao enviar. Tente novamente ou entre em contato pelo Discord.';
+    showStatus('error', '✗ Falha ao enviar. Tente novamente ou entre em contato pelo Discord.');
   } finally {
     btn.textContent = '⚠ Enviar Report';
     btn.disabled = false;
   }
 }
 
-// Nav highlight on scroll
+function showStatus(type, msg) {
+  const status = document.getElementById('formStatus');
+  status.className = 'form-status ' + type;
+  status.textContent = msg;
+}
+
+// ── Nav highlight on scroll ──
 const sections = document.querySelectorAll('section[id]');
 const navLinks = document.querySelectorAll('.nav-links a');
 window.addEventListener('scroll', () => {
@@ -1345,10 +1384,9 @@ window.addEventListener('scroll', () => {
     if (window.scrollY >= s.offsetTop - 100) current = s.id;
   });
   navLinks.forEach(a => {
-    a.style.color = a.getAttribute('href') === '#' + current
-      ? 'var(--gold)' : '';
+    a.style.color = a.getAttribute('href') === '#' + current ? 'var(--gold)' : '';
   });
-});
+}, { passive: true });
 </script>
 </body>
 </html>
