@@ -6,6 +6,17 @@
 <title>Caçadores de Almas — Portal Oficial</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700;900&family=Crimson+Pro:ital,wght@0,300;0,400;0,600;1,300;1,400&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+<script>
+  // ──────────────────────────────────────────────
+  // CONFIGURAÇÃO EMAILJS — preencha com seus dados
+  // ──────────────────────────────────────────────
+  const EMAILJS_PUBLIC_KEY  = 'SjCOaifN0P4oOUVUy';
+  const EMAILJS_SERVICE_ID  = 'service_fbwv0ez';
+  const EMAILJS_TEMPLATE_ID = 'template_3tgksvl';
+  // ──────────────────────────────────────────────
+  (function(){ emailjs.init({ publicKey: EMAILJS_PUBLIC_KEY }); })();
+</script>
 <style>
 :root {
   --void: #02010a;
@@ -1278,30 +1289,51 @@ const observer = new IntersectionObserver((entries) => {
 reveals.forEach(el => observer.observe(el));
 
 // Bug form
-function submitBug(e) {
+async function submitBug(e) {
   e.preventDefault();
-  const btn = document.querySelector('.btn-submit');
+  const btn    = document.querySelector('.btn-submit');
   const status = document.getElementById('formStatus');
-  const playerName = document.getElementById('playerName').value;
+
+  const playerName = document.getElementById('playerName').value.trim();
   const category   = document.getElementById('bugCategory').value;
-  const title      = document.getElementById('bugTitle').value;
-  const desc       = document.getElementById('bugDesc').value;
-  const steps      = document.getElementById('bugSteps').value;
+  const title      = document.getElementById('bugTitle').value.trim();
+  const desc       = document.getElementById('bugDesc').value.trim();
+  const steps      = document.getElementById('bugSteps').value.trim() || 'Não informado';
+
+  // Mapa de categorias legíveis
+  const categoryMap = {
+    combate:'⚔ Combate / Habilidades', guilda:'🏰 Sistema de Guilda',
+    mascara:'😷 Máscaras', poderes:'🌀 Poderes / Expansão de Domínio',
+    missao:'📜 Missões', save:'💾 Save / Dados perdidos',
+    pvp:'⚔ Zona PVP', performance:'📉 Performance / Lag', outro:'🔧 Outro'
+  };
 
   btn.textContent = '⏳ Enviando...';
   btn.disabled = true;
+  status.className = 'form-status';
+  status.textContent = '';
 
-  // Simula envio (substitua pela sua integração real)
-  // Ex: fetch('/api/bugs', { method:'POST', body: JSON.stringify({...}) })
-  setTimeout(() => {
-    // Para integrar de verdade: substitua este setTimeout por um fetch real
-    // e exiba status.className = 'form-status success' ou 'error'
+  try {
+    await emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, {
+      player_name : playerName,
+      category    : categoryMap[category] || category,
+      bug_title   : title,
+      bug_desc    : desc,
+      bug_steps   : steps,
+      sent_at     : new Date().toLocaleString('pt-BR', { timeZone: 'America/Sao_Paulo' })
+    });
+
     status.className = 'form-status success';
-    status.textContent = '✓ Report enviado com sucesso! Obrigado, ' + playerName + '.';
+    status.textContent = '✓ Report enviado! Obrigado, ' + playerName + '. Vamos investigar em breve.';
+    document.getElementById('bugForm').reset();
+  } catch (err) {
+    console.error('EmailJS error:', err);
+    status.className = 'form-status error';
+    status.textContent = '✗ Falha ao enviar. Tente novamente ou entre em contato pelo Discord.';
+  } finally {
     btn.textContent = '⚠ Enviar Report';
     btn.disabled = false;
-    document.getElementById('bugForm').reset();
-  }, 1500);
+  }
 }
 
 // Nav highlight on scroll
