@@ -3,1263 +3,1260 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Éter Ancestral — O Mundo das Almas</title>
-<link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700;900&family=Cinzel:wght@400;600;700&family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&display=swap" rel="stylesheet">
+<title>Caçadores de Almas — Portal Oficial</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700;900&family=Crimson+Pro:ital,wght@0,300;0,400;0,600;1,300;1,400&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+<script>
+  // ──────────────────────────────────────────────
+  // CONFIGURAÇÃO EMAILJS — preencha com seus dados
+  // ──────────────────────────────────────────────
+  const EMAILJS_PUBLIC_KEY  = 'SjCOaifN0P4oOUVUy';
+  const EMAILJS_SERVICE_ID  = 'service_fbwv0ez';
+  const EMAILJS_TEMPLATE_ID = '3tgksvl';
+  // ──────────────────────────────────────────────
+  (function(){ emailjs.init({ publicKey: EMAILJS_PUBLIC_KEY }); })();
+</script>
 <style>
-  :root {
-    --void: #020408;
-    --deep: #060d16;
-    --abyss: #0a1628;
-    --ether-blue: #1a3a6e;
-    --ether-glow: #2a5fbd;
-    --ether-bright: #4d8eff;
-    --ether-pure: #7fb3ff;
-    --gold: #c9922a;
-    --gold-bright: #f0b840;
-    --gold-glow: #ffe0805e;
-    --crimson: #8b1a1a;
-    --crimson-bright: #e03030;
-    --soul-white: #e8dfc8;
-    --soul-dim: #9a8f7a;
-    --text-body: #c4b99a;
-  }
-
-  * { margin: 0; padding: 0; box-sizing: border-box; }
-
-  html { scroll-behavior: smooth; }
-
-  body {
-    background: var(--void);
-    color: var(--text-body);
-    font-family: 'EB Garamond', serif;
-    font-size: 18px;
-    overflow-x: hidden;
-  }
-
-  /* ── PARTICLES ── */
-  #particles {
-    position: fixed;
-    top: 0; left: 0;
-    width: 100%; height: 100%;
-    pointer-events: none;
-    z-index: 0;
-  }
-
-  /* ── NAV ── */
-  nav {
-    position: fixed;
-    top: 0; left: 0; right: 0;
-    z-index: 100;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 0 4rem;
-    height: 70px;
-    background: linear-gradient(180deg, rgba(2,4,8,0.98) 0%, rgba(2,4,8,0.7) 100%);
-    border-bottom: 1px solid rgba(77,142,255,0.15);
-    backdrop-filter: blur(12px);
-  }
-
-  .nav-logo {
-    font-family: 'Cinzel Decorative', serif;
-    font-size: 1.1rem;
-    color: var(--gold-bright);
-    text-shadow: 0 0 20px var(--gold-glow);
-    letter-spacing: 2px;
-    text-decoration: none;
-  }
-
-  .nav-links {
-    display: flex;
-    gap: 2.5rem;
-    list-style: none;
-  }
-
-  .nav-links a {
-    font-family: 'Cinzel', serif;
-    font-size: 0.78rem;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    color: var(--soul-dim);
-    text-decoration: none;
-    transition: color 0.3s, text-shadow 0.3s;
-    cursor: pointer;
-  }
-
-  .nav-links a:hover {
-    color: var(--ether-pure);
-    text-shadow: 0 0 15px rgba(77,142,255,0.6);
-  }
-
-  /* ── HERO ── */
-  #hero {
-    position: relative;
-    height: 100vh;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    overflow: hidden;
-  }
-
-  .hero-bg {
-    position: absolute;
-    inset: 0;
-    background:
-      radial-gradient(ellipse 80% 60% at 50% 40%, rgba(26,58,110,0.4) 0%, transparent 70%),
-      radial-gradient(ellipse 40% 40% at 50% 50%, rgba(77,142,255,0.08) 0%, transparent 60%),
-      radial-gradient(ellipse 100% 100% at 50% 100%, rgba(139,26,26,0.2) 0%, transparent 50%);
-  }
-
-  .hero-orb {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -52%);
-    width: 500px;
-    height: 500px;
-    border-radius: 50%;
-    background: radial-gradient(circle, rgba(77,142,255,0.12) 0%, rgba(26,58,110,0.06) 40%, transparent 70%);
-    border: 1px solid rgba(77,142,255,0.1);
-    box-shadow: 0 0 80px rgba(77,142,255,0.08), inset 0 0 80px rgba(77,142,255,0.05);
-    animation: orbPulse 4s ease-in-out infinite;
-  }
-
-  .hero-orb::before {
-    content: '';
-    position: absolute;
-    inset: 30px;
-    border-radius: 50%;
-    border: 1px solid rgba(201,146,42,0.15);
-    animation: orbPulse 4s ease-in-out infinite reverse;
-  }
-
-  @keyframes orbPulse {
-    0%, 100% { transform: translate(-50%, -52%) scale(1); opacity: 0.6; }
-    50% { transform: translate(-50%, -52%) scale(1.05); opacity: 1; }
-  }
-
-  .hero-eyecatch {
-    font-family: 'Cinzel', serif;
-    font-size: 0.8rem;
-    letter-spacing: 6px;
-    text-transform: uppercase;
-    color: var(--ether-bright);
-    margin-bottom: 1.5rem;
-    opacity: 0;
-    animation: fadeUp 1s 0.3s forwards;
-  }
-
-  .hero-title {
-    font-family: 'Cinzel Decorative', serif;
-    font-size: clamp(2.8rem, 7vw, 6rem);
-    color: var(--soul-white);
-    line-height: 1.05;
-    text-shadow: 0 0 60px rgba(77,142,255,0.3), 0 0 120px rgba(77,142,255,0.15);
-    margin-bottom: 0.5rem;
-    opacity: 0;
-    animation: fadeUp 1s 0.6s forwards;
-  }
-
-  .hero-subtitle {
-    font-family: 'Cinzel Decorative', serif;
-    font-size: clamp(1rem, 2.5vw, 1.8rem);
-    color: var(--gold-bright);
-    letter-spacing: 4px;
-    text-shadow: 0 0 30px var(--gold-glow);
-    margin-bottom: 2rem;
-    opacity: 0;
-    animation: fadeUp 1s 0.9s forwards;
-  }
-
-  .hero-desc {
-    max-width: 580px;
-    font-size: 1.05rem;
-    color: var(--soul-dim);
-    line-height: 1.8;
-    font-style: italic;
-    margin-bottom: 3rem;
-    opacity: 0;
-    animation: fadeUp 1s 1.2s forwards;
-  }
-
-  .hero-cta {
-    display: flex;
-    gap: 1.5rem;
-    opacity: 0;
-    animation: fadeUp 1s 1.5s forwards;
-  }
-
-  .btn-primary {
-    font-family: 'Cinzel', serif;
-    font-size: 0.8rem;
-    letter-spacing: 3px;
-    text-transform: uppercase;
-    padding: 1rem 2.5rem;
-    background: linear-gradient(135deg, var(--ether-blue), var(--ether-glow));
-    color: var(--soul-white);
-    border: 1px solid var(--ether-bright);
-    cursor: pointer;
-    text-decoration: none;
-    transition: all 0.3s;
-    clip-path: polygon(8px 0%, 100% 0%, calc(100% - 8px) 100%, 0% 100%);
-    box-shadow: 0 0 20px rgba(77,142,255,0.2);
-  }
-
-  .btn-primary:hover {
-    background: linear-gradient(135deg, var(--ether-glow), var(--ether-bright));
-    box-shadow: 0 0 40px rgba(77,142,255,0.5);
-    transform: translateY(-2px);
-  }
-
-  .btn-secondary {
-    font-family: 'Cinzel', serif;
-    font-size: 0.8rem;
-    letter-spacing: 3px;
-    text-transform: uppercase;
-    padding: 1rem 2.5rem;
-    background: transparent;
-    color: var(--gold-bright);
-    border: 1px solid var(--gold);
-    cursor: pointer;
-    text-decoration: none;
-    transition: all 0.3s;
-    clip-path: polygon(8px 0%, 100% 0%, calc(100% - 8px) 100%, 0% 100%);
-  }
-
-  .btn-secondary:hover {
-    background: rgba(201,146,42,0.1);
-    box-shadow: 0 0 30px rgba(201,146,42,0.3);
-    transform: translateY(-2px);
-  }
-
-  .hero-scroll {
-    position: absolute;
-    bottom: 2rem;
-    left: 50%;
-    transform: translateX(-50%);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 0.5rem;
-    opacity: 0.4;
-    animation: fadeUp 1s 2s forwards;
-  }
-
-  .hero-scroll span {
-    font-family: 'Cinzel', serif;
-    font-size: 0.65rem;
-    letter-spacing: 4px;
-    text-transform: uppercase;
-  }
-
-  .scroll-line {
-    width: 1px;
-    height: 40px;
-    background: linear-gradient(180deg, var(--ether-bright), transparent);
-    animation: scrollLine 2s ease-in-out infinite;
-  }
-
-  @keyframes scrollLine {
-    0% { transform: scaleY(0); transform-origin: top; }
-    50% { transform: scaleY(1); transform-origin: top; }
-    51% { transform: scaleY(1); transform-origin: bottom; }
-    100% { transform: scaleY(0); transform-origin: bottom; }
-  }
-
-  @keyframes fadeUp {
-    to { opacity: 1; transform: translateY(0); }
-    from { opacity: 0; transform: translateY(30px); }
-  }
-
-  /* ── SECTION COMMON ── */
-  section {
-    position: relative;
-    z-index: 1;
-  }
-
-  .section-header {
-    text-align: center;
-    margin-bottom: 4rem;
-  }
-
-  .section-eyebrow {
-    font-family: 'Cinzel', serif;
-    font-size: 0.7rem;
-    letter-spacing: 6px;
-    text-transform: uppercase;
-    color: var(--ether-bright);
-    display: block;
-    margin-bottom: 1rem;
-  }
-
-  .section-title {
-    font-family: 'Cinzel Decorative', serif;
-    font-size: clamp(1.8rem, 4vw, 3rem);
-    color: var(--soul-white);
-    text-shadow: 0 0 30px rgba(77,142,255,0.2);
-  }
-
-  .section-divider {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 1rem;
-    margin-top: 1.2rem;
-  }
-
-  .divider-line {
-    width: 80px;
-    height: 1px;
-    background: linear-gradient(90deg, transparent, var(--gold));
-  }
-
-  .divider-line.right {
-    background: linear-gradient(90deg, var(--gold), transparent);
-  }
-
-  .divider-gem {
-    width: 8px;
-    height: 8px;
-    background: var(--gold-bright);
-    transform: rotate(45deg);
-    box-shadow: 0 0 12px var(--gold);
-  }
-
-  /* ── EVENTS ── */
-  #eventos {
-    padding: 7rem 4rem;
-    background: linear-gradient(180deg, var(--void) 0%, var(--deep) 50%, var(--void) 100%);
-  }
-
-  .events-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
-    gap: 2rem;
-    max-width: 1200px;
-    margin: 0 auto;
-  }
-
-  .event-card {
-    position: relative;
-    background: linear-gradient(135deg, rgba(10,22,40,0.9), rgba(6,13,22,0.95));
-    border: 1px solid rgba(77,142,255,0.12);
-    padding: 2rem;
-    transition: all 0.4s;
-    overflow: hidden;
-    cursor: default;
-  }
-
-  .event-card::before {
-    content: '';
-    position: absolute;
-    top: 0; left: 0;
-    right: 0;
-    height: 2px;
-    background: linear-gradient(90deg, transparent, var(--ether-bright), transparent);
-    opacity: 0;
-    transition: opacity 0.3s;
-  }
-
-  .event-card:hover::before { opacity: 1; }
-
-  .event-card:hover {
-    border-color: rgba(77,142,255,0.3);
-    transform: translateY(-4px);
-    box-shadow: 0 20px 60px rgba(0,0,0,0.4), 0 0 30px rgba(77,142,255,0.08);
-  }
-
-  .event-card.pvp .event-tag { color: var(--crimson-bright); border-color: var(--crimson); }
-  .event-card.pvp::before { background: linear-gradient(90deg, transparent, var(--crimson-bright), transparent); }
-
-  .event-card.novidade .event-tag { color: var(--gold-bright); border-color: var(--gold); }
-  .event-card.novidade::before { background: linear-gradient(90deg, transparent, var(--gold-bright), transparent); }
-
-  .event-tag {
-    font-family: 'Cinzel', serif;
-    font-size: 0.65rem;
-    letter-spacing: 3px;
-    text-transform: uppercase;
-    border: 1px solid var(--ether-bright);
-    color: var(--ether-bright);
-    padding: 0.2rem 0.7rem;
-    display: inline-block;
-    margin-bottom: 1rem;
-  }
-
-  .event-date {
-    font-family: 'Cinzel', serif;
-    font-size: 0.72rem;
-    color: var(--soul-dim);
-    letter-spacing: 2px;
-    margin-bottom: 0.6rem;
-  }
-
-  .event-title {
-    font-family: 'Cinzel', serif;
-    font-size: 1.15rem;
-    color: var(--soul-white);
-    margin-bottom: 0.8rem;
-    line-height: 1.3;
-  }
-
-  .event-desc {
-    font-size: 0.95rem;
-    line-height: 1.7;
-    color: var(--soul-dim);
-    font-style: italic;
-  }
-
-  .event-status {
-    display: inline-block;
-    margin-top: 1.2rem;
-    font-family: 'Cinzel', serif;
-    font-size: 0.65rem;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    padding: 0.25rem 0.8rem;
-  }
-
-  .status-em-breve {
-    background: rgba(26,58,110,0.4);
-    border: 1px solid rgba(77,142,255,0.3);
-    color: var(--ether-pure);
-  }
-
-  .status-ativo {
-    background: rgba(20,80,30,0.4);
-    border: 1px solid rgba(50,180,80,0.4);
-    color: #5dde7a;
-  }
-
-  /* ── STORY ── */
-  #historia {
-    padding: 7rem 4rem;
-    background: var(--void);
-  }
-
-  .story-container {
-    max-width: 900px;
-    margin: 0 auto;
-  }
-
-  .story-intro {
-    text-align: center;
-    font-size: 1.15rem;
-    font-style: italic;
-    line-height: 1.9;
-    color: var(--soul-dim);
-    margin-bottom: 4rem;
-    padding: 2rem;
-    border: 1px solid rgba(201,146,42,0.12);
-    background: rgba(201,146,42,0.03);
-    position: relative;
-  }
-
-  .story-intro::before, .story-intro::after {
-    content: '❝';
-    font-size: 3rem;
-    color: var(--gold);
-    opacity: 0.3;
-    position: absolute;
-  }
-
-  .story-intro::before { top: -0.5rem; left: 1rem; }
-  .story-intro::after { content: '❞'; bottom: -1.5rem; right: 1rem; }
-
-  .story-chapter {
-    margin-bottom: 3rem;
-    padding: 2.5rem;
-    background: linear-gradient(135deg, rgba(10,22,40,0.6), rgba(6,13,22,0.8));
-    border-left: 2px solid var(--ether-glow);
-    position: relative;
-  }
-
-  .story-chapter.gold-border { border-left-color: var(--gold); }
-  .story-chapter.crimson-border { border-left-color: var(--crimson-bright); }
-
-  .chapter-icon {
-    font-size: 1.5rem;
-    margin-bottom: 0.8rem;
-    display: block;
-  }
-
-  .chapter-title {
-    font-family: 'Cinzel', serif;
-    font-size: 1.2rem;
-    color: var(--soul-white);
-    margin-bottom: 1rem;
-  }
-
-  .chapter-text {
-    line-height: 1.9;
-    color: var(--text-body);
-  }
-
-  .chapter-quote {
-    margin: 1.5rem 0 0;
-    padding: 1rem 1.5rem;
-    background: rgba(77,142,255,0.05);
-    border-left: 2px solid rgba(77,142,255,0.3);
-    font-style: italic;
-    color: var(--soul-dim);
-    font-size: 0.95rem;
-  }
-
-  .chapter-quote.gold-quote {
-    background: rgba(201,146,42,0.05);
-    border-left-color: rgba(201,146,42,0.4);
-  }
-
-  /* ── BOSS CLASSES ── */
-  .classes-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-    gap: 1.5rem;
-    max-width: 1100px;
-    margin: 3rem auto 0;
-  }
-
-  .class-card {
-    padding: 2rem;
-    background: linear-gradient(135deg, rgba(10,22,40,0.7), rgba(6,13,22,0.9));
-    border: 1px solid rgba(77,142,255,0.1);
-    position: relative;
-    overflow: hidden;
-    transition: all 0.3s;
-  }
-
-  .class-card:hover {
-    border-color: rgba(77,142,255,0.3);
-    transform: translateY(-3px);
-  }
-
-  .class-icon { font-size: 2rem; margin-bottom: 0.8rem; }
-
-  .class-name {
-    font-family: 'Cinzel', serif;
-    font-size: 1rem;
-    color: var(--soul-white);
-    margin-bottom: 0.5rem;
-  }
-
-  .class-motivation {
-    font-size: 0.85rem;
-    color: var(--ether-pure);
-    font-style: italic;
-    margin-bottom: 0.5rem;
-  }
-
-  .class-desc {
-    font-size: 0.9rem;
-    color: var(--soul-dim);
-    line-height: 1.6;
-  }
-
-  .class-ally {
-    display: inline-block;
-    margin-top: 0.8rem;
-    font-family: 'Cinzel', serif;
-    font-size: 0.6rem;
-    letter-spacing: 2px;
-    padding: 0.2rem 0.6rem;
-    border: 1px solid;
-  }
-
-  .ally-yes { border-color: rgba(50,180,80,0.4); color: #5dde7a; }
-  .ally-no { border-color: rgba(200,50,50,0.4); color: #e05555; }
-  .ally-rare { border-color: rgba(200,150,50,0.4); color: var(--gold-bright); }
-  .ally-sometimes { border-color: rgba(77,142,255,0.4); color: var(--ether-pure); }
-
-  /* ── BUGS ── */
-  #bugs {
-    padding: 7rem 4rem;
-    background: linear-gradient(180deg, var(--void) 0%, var(--deep) 100%);
-  }
-
-  .bug-container {
-    max-width: 800px;
-    margin: 0 auto;
-  }
-
-  .bug-form {
-    background: linear-gradient(135deg, rgba(10,22,40,0.8), rgba(6,13,22,0.9));
-    border: 1px solid rgba(77,142,255,0.15);
-    padding: 3rem;
-    position: relative;
-  }
-
-  .bug-form::before {
-    content: '';
-    position: absolute;
-    top: 0; left: 0; right: 0;
-    height: 2px;
-    background: linear-gradient(90deg, transparent, var(--crimson-bright), transparent);
-  }
-
-  .form-group {
-    margin-bottom: 1.8rem;
-  }
-
-  .form-label {
-    display: block;
-    font-family: 'Cinzel', serif;
-    font-size: 0.72rem;
-    letter-spacing: 3px;
-    text-transform: uppercase;
-    color: var(--soul-dim);
-    margin-bottom: 0.6rem;
-  }
-
-  .form-input, .form-select, .form-textarea {
-    width: 100%;
-    background: rgba(2,4,8,0.8);
-    border: 1px solid rgba(77,142,255,0.15);
-    color: var(--soul-white);
-    padding: 0.85rem 1rem;
-    font-family: 'EB Garamond', serif;
-    font-size: 1rem;
-    transition: border-color 0.3s, box-shadow 0.3s;
-    outline: none;
-  }
-
-  .form-input:focus, .form-select:focus, .form-textarea:focus {
-    border-color: rgba(77,142,255,0.5);
-    box-shadow: 0 0 15px rgba(77,142,255,0.1);
-  }
-
-  .form-select {
-    cursor: pointer;
-    -webkit-appearance: none;
-    appearance: none;
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M0 0l5 6 5-6z' fill='%234d8eff'/%3E%3C/svg%3E");
-    background-repeat: no-repeat;
-    background-position: right 1rem center;
-  }
-
-  .form-select option { background: #060d16; }
-
-  .form-textarea {
-    resize: vertical;
-    min-height: 140px;
-    line-height: 1.7;
-  }
-
-  .btn-submit {
-    font-family: 'Cinzel', serif;
-    font-size: 0.78rem;
-    letter-spacing: 3px;
-    text-transform: uppercase;
-    padding: 1rem 3rem;
-    background: linear-gradient(135deg, var(--crimson), var(--crimson-bright));
-    color: var(--soul-white);
-    border: 1px solid var(--crimson-bright);
-    cursor: pointer;
-    transition: all 0.3s;
-    clip-path: polygon(8px 0%, 100% 0%, calc(100% - 8px) 100%, 0% 100%);
-    width: 100%;
-    box-shadow: 0 0 20px rgba(224,48,48,0.15);
-  }
-
-  .btn-submit:hover {
-    box-shadow: 0 0 40px rgba(224,48,48,0.4);
-    transform: translateY(-2px);
-  }
-
-  .form-success {
-    display: none;
-    text-align: center;
-    padding: 2rem;
-  }
-
-  .form-success .success-icon { font-size: 3rem; margin-bottom: 1rem; }
-
-  .form-success .success-title {
-    font-family: 'Cinzel', serif;
-    font-size: 1.2rem;
-    color: #5dde7a;
-    margin-bottom: 0.5rem;
-  }
-
-  .form-success p {
-    color: var(--soul-dim);
-    font-style: italic;
-  }
-
-  /* ── ADMIN PANEL ── */
-  #admin-panel {
-    display: none;
-    position: fixed;
-    inset: 0;
-    z-index: 200;
-    background: rgba(2,4,8,0.97);
-    overflow-y: auto;
-    padding: 2rem;
-  }
-
-  .admin-header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    margin-bottom: 2rem;
-    padding-bottom: 1rem;
-    border-bottom: 1px solid rgba(77,142,255,0.2);
-  }
-
-  .admin-title {
-    font-family: 'Cinzel Decorative', serif;
-    font-size: 1.4rem;
-    color: var(--gold-bright);
-    text-shadow: 0 0 20px var(--gold-glow);
-  }
-
-  .btn-close-admin {
-    font-family: 'Cinzel', serif;
-    font-size: 0.7rem;
-    letter-spacing: 2px;
-    padding: 0.5rem 1.2rem;
-    background: transparent;
-    border: 1px solid rgba(200,50,50,0.4);
-    color: #e05555;
-    cursor: pointer;
-    transition: all 0.2s;
-  }
-
-  .btn-close-admin:hover { background: rgba(200,50,50,0.1); }
-
-  .admin-stats {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 1rem;
-    margin-bottom: 2rem;
-  }
-
-  .stat-card {
-    background: rgba(10,22,40,0.6);
-    border: 1px solid rgba(77,142,255,0.12);
-    padding: 1.5rem;
-    text-align: center;
-  }
-
-  .stat-number {
-    font-family: 'Cinzel Decorative', serif;
-    font-size: 2.5rem;
-    color: var(--ether-bright);
-    display: block;
-  }
-
-  .stat-label {
-    font-family: 'Cinzel', serif;
-    font-size: 0.65rem;
-    letter-spacing: 3px;
-    color: var(--soul-dim);
-    text-transform: uppercase;
-  }
-
-  .reports-list { display: flex; flex-direction: column; gap: 1rem; }
-
-  .report-item {
-    background: rgba(10,22,40,0.6);
-    border: 1px solid rgba(77,142,255,0.1);
-    padding: 1.5rem;
-    border-left: 3px solid var(--ether-glow);
-    position: relative;
-  }
-
-  .report-item.tipo-bug { border-left-color: var(--crimson-bright); }
-  .report-item.tipo-lag { border-left-color: #e0a030; }
-  .report-item.tipo-sugestao { border-left-color: #30c070; }
-
-  .report-meta {
-    display: flex;
-    gap: 1rem;
-    align-items: center;
-    margin-bottom: 0.6rem;
-    flex-wrap: wrap;
-  }
-
-  .report-type {
-    font-family: 'Cinzel', serif;
-    font-size: 0.6rem;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    padding: 0.15rem 0.5rem;
-    border: 1px solid;
-  }
-
-  .report-type.bug { border-color: var(--crimson-bright); color: var(--crimson-bright); }
-  .report-type.lag { border-color: #e0a030; color: #e0a030; }
-  .report-type.sugestao { border-color: #30c070; color: #30c070; }
-  .report-type.outro { border-color: var(--soul-dim); color: var(--soul-dim); }
-
-  .report-nick {
-    font-family: 'Cinzel', serif;
-    font-size: 0.78rem;
-    color: var(--ether-pure);
-  }
-
-  .report-date {
-    font-family: 'Cinzel', serif;
-    font-size: 0.65rem;
-    color: var(--soul-dim);
-    margin-left: auto;
-  }
-
-  .report-text {
-    font-size: 0.95rem;
-    line-height: 1.7;
-    color: var(--text-body);
-  }
-
-  .no-reports {
-    text-align: center;
-    padding: 4rem;
-    color: var(--soul-dim);
-    font-style: italic;
-  }
-
-  .admin-btn-clear {
-    margin-top: 1.5rem;
-    font-family: 'Cinzel', serif;
-    font-size: 0.65rem;
-    letter-spacing: 2px;
-    padding: 0.5rem 1.2rem;
-    background: transparent;
-    border: 1px solid rgba(200,50,50,0.3);
-    color: rgba(200,50,50,0.7);
-    cursor: pointer;
-    transition: all 0.2s;
-  }
-
-  .admin-btn-clear:hover { background: rgba(200,50,50,0.08); color: #e05555; }
-
-  /* ── ADMIN LOGIN ── */
-  #admin-login {
-    display: none;
-    position: fixed;
-    inset: 0;
-    z-index: 300;
-    background: rgba(2,4,8,0.98);
-    align-items: center;
-    justify-content: center;
-  }
-
-  .login-box {
-    background: linear-gradient(135deg, rgba(10,22,40,0.9), rgba(6,13,22,0.95));
-    border: 1px solid rgba(201,146,42,0.2);
-    padding: 3rem;
-    width: 400px;
-    text-align: center;
-  }
-
-  .login-title {
-    font-family: 'Cinzel Decorative', serif;
-    font-size: 1.2rem;
-    color: var(--gold-bright);
-    margin-bottom: 0.5rem;
-  }
-
-  .login-sub {
-    font-size: 0.9rem;
-    color: var(--soul-dim);
-    font-style: italic;
-    margin-bottom: 2rem;
-  }
-
-  .login-input {
-    width: 100%;
-    background: rgba(2,4,8,0.8);
-    border: 1px solid rgba(201,146,42,0.2);
-    color: var(--soul-white);
-    padding: 0.85rem 1rem;
-    font-family: 'EB Garamond', serif;
-    font-size: 1rem;
-    outline: none;
-    text-align: center;
-    letter-spacing: 4px;
-    margin-bottom: 1.5rem;
-  }
-
-  .login-input:focus { border-color: var(--gold); }
-
-  .login-error {
-    color: var(--crimson-bright);
-    font-family: 'Cinzel', serif;
-    font-size: 0.72rem;
-    letter-spacing: 2px;
-    margin-bottom: 1rem;
-    display: none;
-  }
-
-  .btn-login {
-    width: 100%;
-    font-family: 'Cinzel', serif;
-    font-size: 0.78rem;
-    letter-spacing: 3px;
-    text-transform: uppercase;
-    padding: 1rem;
-    background: linear-gradient(135deg, rgba(201,146,42,0.2), rgba(240,184,64,0.3));
-    color: var(--gold-bright);
-    border: 1px solid var(--gold);
-    cursor: pointer;
-    transition: all 0.3s;
-  }
-
-  .btn-login:hover { box-shadow: 0 0 30px rgba(201,146,42,0.3); }
-
-  .btn-cancel-login {
-    margin-top: 1rem;
-    background: none;
-    border: none;
-    color: var(--soul-dim);
-    font-family: 'Cinzel', serif;
-    font-size: 0.65rem;
-    letter-spacing: 2px;
-    cursor: pointer;
-    transition: color 0.2s;
-  }
-
-  .btn-cancel-login:hover { color: var(--soul-white); }
-
-  /* ── FOOTER ── */
-  footer {
-    padding: 3rem 4rem;
-    background: var(--void);
-    border-top: 1px solid rgba(77,142,255,0.08);
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    flex-wrap: wrap;
-    gap: 1rem;
-  }
-
-  .footer-logo {
-    font-family: 'Cinzel Decorative', serif;
-    font-size: 1rem;
-    color: var(--gold);
-    opacity: 0.6;
-  }
-
-  .footer-text {
-    font-size: 0.8rem;
-    color: var(--soul-dim);
-    opacity: 0.5;
-    font-style: italic;
-  }
-
-  .footer-admin {
-    font-family: 'Cinzel', serif;
-    font-size: 0.65rem;
-    letter-spacing: 2px;
-    color: rgba(77,142,255,0.3);
-    background: none;
-    border: 1px solid rgba(77,142,255,0.1);
-    padding: 0.4rem 0.8rem;
-    cursor: pointer;
-    transition: all 0.3s;
-  }
-
-  .footer-admin:hover {
-    color: var(--ether-bright);
-    border-color: rgba(77,142,255,0.3);
-  }
-
-  /* ── NOTIFICATION BADGE ── */
-  .notif-badge {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    width: 18px; height: 18px;
-    background: var(--crimson-bright);
-    border-radius: 50%;
-    font-size: 0.6rem;
-    color: white;
-    font-family: 'Cinzel', serif;
-    margin-left: 0.4rem;
-    vertical-align: middle;
-    display: none;
-  }
-
-  /* ── TOAST NOTIFICATION ── */
-  .toast {
-    position: fixed;
-    bottom: 2rem;
-    right: 2rem;
-    background: rgba(10,22,40,0.97);
-    border: 1px solid var(--ether-bright);
-    padding: 1rem 1.5rem;
-    font-family: 'Cinzel', serif;
-    font-size: 0.75rem;
-    letter-spacing: 1px;
-    color: var(--ether-pure);
-    z-index: 500;
-    transform: translateX(200%);
-    transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
-    max-width: 320px;
-    box-shadow: 0 10px 40px rgba(0,0,0,0.4);
-  }
-
-  .toast.show { transform: translateX(0); }
-  .toast-title { font-size: 0.85rem; color: var(--soul-white); margin-bottom: 0.3rem; }
-
-  /* ── SCROLLBAR ── */
-  ::-webkit-scrollbar { width: 6px; }
-  ::-webkit-scrollbar-track { background: var(--void); }
-  ::-webkit-scrollbar-thumb { background: var(--ether-blue); border-radius: 3px; }
-
-  /* ── RESPONSIVE ── */
-  @media (max-width: 768px) {
-    nav { padding: 0 1.5rem; }
-    .nav-links { display: none; }
-    #eventos, #historia, #bugs { padding: 5rem 1.5rem; }
-    footer { padding: 2rem 1.5rem; flex-direction: column; text-align: center; }
-    .admin-stats { grid-template-columns: 1fr; }
-    .login-box { width: 90%; padding: 2rem; }
-  }
-
-  /* Background animated grid */
-  .grid-bg {
-    position: fixed;
-    inset: 0;
-    z-index: 0;
-    background-image:
-      linear-gradient(rgba(77,142,255,0.02) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(77,142,255,0.02) 1px, transparent 1px);
-    background-size: 60px 60px;
-    pointer-events: none;
-  }
+:root {
+  --void: #02010a;
+  --deep: #07040f;
+  --panel: #0e0a1a;
+  --border: #1e1430;
+  --gold: #c9a227;
+  --gold-dim: #7a5f10;
+  --gold-bright: #f0c84a;
+  --crimson: #8b0000;
+  --crimson-bright: #cc2222;
+  --jade: #1a5c3a;
+  --jade-bright: #2aaa6a;
+  --text: #d4c8a8;
+  --text-dim: #7a6f5a;
+  --text-bright: #f5ead0;
+  --glow-gold: 0 0 20px rgba(201,162,39,0.4), 0 0 60px rgba(201,162,39,0.15);
+  --glow-red: 0 0 20px rgba(139,0,0,0.5), 0 0 60px rgba(139,0,0,0.2);
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--void);
+  color: var(--text);
+  font-family: 'Crimson Pro', Georgia, serif;
+  font-size: 17px;
+  line-height: 1.7;
+  overflow-x: hidden;
+}
+
+/* ── GRAIN OVERLAY ── */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+  pointer-events: none;
+  z-index: 9999;
+  opacity: 0.35;
+}
+
+/* ── NAV ── */
+nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 3rem;
+  height: 64px;
+  background: linear-gradient(180deg, rgba(2,1,10,0.98) 0%, rgba(2,1,10,0.85) 100%);
+  border-bottom: 1px solid var(--border);
+  backdrop-filter: blur(12px);
+}
+
+.nav-logo {
+  font-family: 'Cinzel Decorative', serif;
+  font-size: 1.2rem;
+  font-weight: 900;
+  letter-spacing: 0.15em;
+  color: var(--gold);
+  text-shadow: var(--glow-gold);
+  text-decoration: none;
+}
+
+.nav-links {
+  display: flex;
+  gap: 2.5rem;
+  list-style: none;
+}
+
+.nav-links a {
+  color: var(--text-dim);
+  text-decoration: none;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.72rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  transition: color 0.2s, text-shadow 0.2s;
+}
+
+.nav-links a:hover {
+  color: var(--gold);
+  text-shadow: 0 0 12px rgba(201,162,39,0.5);
+}
+
+/* ── HERO ── */
+.hero {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 80px 2rem 4rem;
+  overflow: hidden;
+}
+
+.hero-bg {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 80% 60% at 50% 40%, rgba(139,0,0,0.12) 0%, transparent 70%),
+    radial-gradient(ellipse 60% 80% at 20% 80%, rgba(26,92,58,0.08) 0%, transparent 60%),
+    radial-gradient(ellipse 40% 40% at 80% 20%, rgba(201,162,39,0.06) 0%, transparent 50%),
+    var(--void);
+}
+
+.hero-seal {
+  position: relative;
+  width: 140px;
+  height: 140px;
+  margin-bottom: 2.5rem;
+  animation: seal-pulse 4s ease-in-out infinite;
+}
+
+@keyframes seal-pulse {
+  0%, 100% { filter: drop-shadow(0 0 12px rgba(201,162,39,0.4)); transform: scale(1); }
+  50% { filter: drop-shadow(0 0 28px rgba(201,162,39,0.7)); transform: scale(1.03); }
+}
+
+.hero-seal svg { width: 100%; height: 100%; }
+
+.hero-eyebrow {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.65rem;
+  letter-spacing: 0.35em;
+  text-transform: uppercase;
+  color: var(--gold-dim);
+  margin-bottom: 1rem;
+  animation: fade-up 1s ease both 0.2s;
+}
+
+.hero-title {
+  font-family: 'Cinzel Decorative', serif;
+  font-size: clamp(3.5rem, 10vw, 7rem);
+  font-weight: 900;
+  letter-spacing: 0.08em;
+  line-height: 0.9;
+  color: var(--text-bright);
+  text-shadow:
+    0 0 40px rgba(201,162,39,0.3),
+    0 0 80px rgba(201,162,39,0.1),
+    0 2px 0 rgba(0,0,0,0.8);
+  animation: fade-up 1s ease both 0.4s;
+  position: relative;
+}
+
+.hero-title span {
+  color: var(--gold);
+  text-shadow: var(--glow-gold);
+}
+
+.hero-subtitle {
+  font-style: italic;
+  font-size: 1.2rem;
+  color: var(--text-dim);
+  margin-top: 1.2rem;
+  margin-bottom: 3rem;
+  letter-spacing: 0.04em;
+  animation: fade-up 1s ease both 0.6s;
+}
+
+.hero-ctas {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+  justify-content: center;
+  animation: fade-up 1s ease both 0.8s;
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.9rem 2rem;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.75rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  text-decoration: none;
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s;
+  position: relative;
+  overflow: hidden;
+}
+
+.btn::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(255,255,255,0.08) 0%, transparent 60%);
+  opacity: 0;
+  transition: opacity 0.2s;
+}
+.btn:hover::before { opacity: 1; }
+
+.btn-gold {
+  background: linear-gradient(135deg, #8a6200 0%, #c9a227 50%, #8a6200 100%);
+  color: var(--void);
+  font-weight: 700;
+  box-shadow: 0 0 0 1px rgba(201,162,39,0.4), var(--glow-gold);
+}
+.btn-gold:hover { box-shadow: 0 0 0 1px rgba(201,162,39,0.8), 0 0 30px rgba(201,162,39,0.5), 0 0 80px rgba(201,162,39,0.2); transform: translateY(-1px); }
+
+.btn-ghost {
+  background: transparent;
+  color: var(--text);
+  border: 1px solid var(--border);
+}
+.btn-ghost:hover { border-color: var(--gold-dim); color: var(--gold); }
+
+/* ── DIVIDER ── */
+.rune-divider {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  margin: 0 auto 3rem;
+  max-width: 600px;
+  padding: 0 2rem;
+}
+.rune-divider::before, .rune-divider::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--gold-dim), transparent);
+}
+.rune-divider span {
+  color: var(--gold);
+  font-size: 1.2rem;
+  flex-shrink: 0;
+  text-shadow: var(--glow-gold);
+}
+
+/* ── SECTIONS ── */
+section {
+  padding: 6rem 2rem;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.section-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.62rem;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--gold-dim);
+  margin-bottom: 0.6rem;
+}
+
+.section-title {
+  font-family: 'Cinzel Decorative', serif;
+  font-size: clamp(1.6rem, 4vw, 2.4rem);
+  font-weight: 700;
+  color: var(--text-bright);
+  margin-bottom: 1rem;
+  line-height: 1.2;
+}
+
+/* ── UPDATES GRID ── */
+.updates-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 1.5px;
+  background: var(--border);
+  border: 1.5px solid var(--border);
+  margin-top: 2.5rem;
+}
+
+.update-card {
+  background: var(--panel);
+  padding: 2rem;
+  position: relative;
+  overflow: hidden;
+  transition: background 0.2s;
+}
+.update-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0;
+  width: 3px; height: 100%;
+}
+.update-card.type-update::before { background: var(--jade-bright); }
+.update-card.type-event::before  { background: var(--gold); }
+.update-card.type-fix::before    { background: var(--crimson-bright); }
+.update-card.type-news::before   { background: #4a90e2; }
+
+.update-card:hover { background: #100c1e; }
+
+.update-tag {
+  display: inline-block;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.6rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  padding: 0.25rem 0.7rem;
+  border-radius: 2px;
+  margin-bottom: 1rem;
+  font-weight: 700;
+}
+.type-update .update-tag  { background: rgba(42,170,106,0.15); color: var(--jade-bright); border: 1px solid rgba(42,170,106,0.3); }
+.type-event .update-tag   { background: rgba(201,162,39,0.15); color: var(--gold); border: 1px solid rgba(201,162,39,0.3); }
+.type-fix .update-tag     { background: rgba(204,34,34,0.15); color: var(--crimson-bright); border: 1px solid rgba(204,34,34,0.3); }
+.type-news .update-tag    { background: rgba(74,144,226,0.15); color: #4a90e2; border: 1px solid rgba(74,144,226,0.3); }
+
+.update-date {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.65rem;
+  color: var(--text-dim);
+  margin-bottom: 0.5rem;
+}
+
+.update-title {
+  font-family: 'Cinzel Decorative', serif;
+  font-size: 1rem;
+  color: var(--text-bright);
+  margin-bottom: 0.8rem;
+  line-height: 1.3;
+}
+
+.update-body {
+  font-size: 0.95rem;
+  color: var(--text-dim);
+  line-height: 1.6;
+}
+
+/* ── LORE ── */
+#lore {
+  position: relative;
+}
+
+.lore-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4rem;
+  align-items: start;
+  margin-top: 2.5rem;
+}
+
+.lore-text p {
+  margin-bottom: 1.2rem;
+  color: var(--text);
+  font-size: 1.05rem;
+}
+
+.lore-text p em {
+  color: var(--gold-bright);
+  font-style: italic;
+}
+
+.lore-text blockquote {
+  border-left: 2px solid var(--gold-dim);
+  padding: 1rem 1.5rem;
+  margin: 2rem 0;
+  background: rgba(201,162,39,0.04);
+  font-style: italic;
+  color: var(--text-dim);
+  font-size: 1.1rem;
+}
+
+.lore-aside {
+  position: sticky;
+  top: 100px;
+}
+
+.lore-panel {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  padding: 2rem;
+  margin-bottom: 1.5rem;
+  position: relative;
+}
+
+.lore-panel::before {
+  content: '';
+  position: absolute;
+  top: -1px; left: 2rem; right: 2rem;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--gold-dim), transparent);
+}
+
+.lore-panel-title {
+  font-family: 'Cinzel Decorative', serif;
+  font-size: 0.85rem;
+  color: var(--gold);
+  margin-bottom: 1rem;
+  letter-spacing: 0.1em;
+}
+
+.faction-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+.faction-list li {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  font-size: 0.95rem;
+  color: var(--text-dim);
+  padding: 0.5rem 0;
+  border-bottom: 1px solid rgba(255,255,255,0.04);
+}
+
+.faction-list li:last-child { border-bottom: none; }
+
+.faction-icon {
+  font-size: 1.2rem;
+  width: 2rem;
+  text-align: center;
+  flex-shrink: 0;
+}
+
+/* ── BUG REPORT ── */
+#bugs {
+  position: relative;
+}
+
+.bug-layout {
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  gap: 3rem;
+  align-items: start;
+  margin-top: 2.5rem;
+}
+
+.bug-form {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  padding: 2.5rem;
+  position: relative;
+}
+
+.bug-form::after {
+  content: '';
+  position: absolute;
+  bottom: -1px; left: 2rem; right: 2rem;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--crimson-bright), transparent);
+  opacity: 0.4;
+}
+
+.form-group {
+  margin-bottom: 1.5rem;
+}
+
+.form-label {
+  display: block;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.65rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--text-dim);
+  margin-bottom: 0.5rem;
+}
+
+.form-input, .form-select, .form-textarea {
+  width: 100%;
+  background: rgba(255,255,255,0.03);
+  border: 1px solid var(--border);
+  color: var(--text);
+  padding: 0.85rem 1rem;
+  font-family: 'Crimson Pro', serif;
+  font-size: 1rem;
+  transition: border-color 0.2s, box-shadow 0.2s;
+  outline: none;
+  appearance: none;
+}
+
+.form-input:focus, .form-select:focus, .form-textarea:focus {
+  border-color: var(--gold-dim);
+  box-shadow: 0 0 0 3px rgba(201,162,39,0.08);
+}
+
+.form-textarea {
+  resize: vertical;
+  min-height: 140px;
+  line-height: 1.6;
+}
+
+.form-select {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath fill='%237a6f5a' d='M6 8L0 0h12z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 1rem center;
+  cursor: pointer;
+}
+
+.form-select option {
+  background: var(--deep);
+  color: var(--text);
+}
+
+.btn-submit {
+  width: 100%;
+  padding: 1rem;
+  font-size: 0.75rem;
+  margin-top: 0.5rem;
+}
+
+/* Status feedback */
+.form-status {
+  display: none;
+  margin-top: 1rem;
+  padding: 0.8rem 1rem;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.7rem;
+  letter-spacing: 0.1em;
+}
+.form-status.success {
+  display: block;
+  background: rgba(42,170,106,0.1);
+  border: 1px solid rgba(42,170,106,0.3);
+  color: var(--jade-bright);
+}
+.form-status.error {
+  display: block;
+  background: rgba(204,34,34,0.1);
+  border: 1px solid rgba(204,34,34,0.3);
+  color: var(--crimson-bright);
+}
+
+/* Bug aside */
+.bug-aside {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.bug-tip {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  padding: 1.5rem;
+}
+
+.bug-tip-title {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.65rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--text-dim);
+  margin-bottom: 1rem;
+}
+
+.bug-tip ul {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+.bug-tip li {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.7rem;
+  font-size: 0.95rem;
+  color: var(--text-dim);
+}
+
+.bug-tip li::before {
+  content: '›';
+  color: var(--gold-dim);
+  font-size: 1.2rem;
+  line-height: 1.3;
+  flex-shrink: 0;
+}
+
+/* ── EVENTS ── */
+.events-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  margin-top: 2.5rem;
+  border: 1px solid var(--border);
+}
+
+.event-item {
+  display: grid;
+  grid-template-columns: 80px 1fr auto;
+  align-items: center;
+  gap: 2rem;
+  padding: 1.5rem 2rem;
+  border-bottom: 1px solid var(--border);
+  transition: background 0.2s;
+  position: relative;
+}
+.event-item:last-child { border-bottom: none; }
+.event-item:hover { background: rgba(255,255,255,0.02); }
+
+.event-item.active::before {
+  content: '';
+  position: absolute;
+  left: 0; top: 0; bottom: 0;
+  width: 3px;
+  background: var(--gold);
+  box-shadow: var(--glow-gold);
+}
+
+.event-item.past { opacity: 0.5; }
+
+.event-date-block {
+  text-align: center;
+  font-family: 'JetBrains Mono', monospace;
+}
+
+.event-day {
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--gold);
+  line-height: 1;
+}
+
+.event-month {
+  font-size: 0.6rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--text-dim);
+}
+
+.event-info {}
+
+.event-title {
+  font-family: 'Cinzel Decorative', serif;
+  font-size: 0.95rem;
+  color: var(--text-bright);
+  margin-bottom: 0.3rem;
+}
+
+.event-desc {
+  font-size: 0.9rem;
+  color: var(--text-dim);
+}
+
+.event-badge {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.58rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  padding: 0.3rem 0.8rem;
+  white-space: nowrap;
+}
+
+.badge-active { background: rgba(201,162,39,0.15); color: var(--gold); border: 1px solid rgba(201,162,39,0.4); }
+.badge-soon   { background: rgba(74,144,226,0.1); color: #4a90e2; border: 1px solid rgba(74,144,226,0.3); }
+.badge-ended  { background: rgba(255,255,255,0.04); color: var(--text-dim); border: 1px solid var(--border); }
+
+/* ── FOOTER ── */
+footer {
+  border-top: 1px solid var(--border);
+  padding: 3rem 2rem;
+  text-align: center;
+}
+
+.footer-logo {
+  font-family: 'Cinzel Decorative', serif;
+  font-size: 1.5rem;
+  font-weight: 900;
+  color: var(--gold-dim);
+  letter-spacing: 0.15em;
+  margin-bottom: 1rem;
+  display: block;
+}
+
+.footer-links {
+  display: flex;
+  gap: 2rem;
+  justify-content: center;
+  list-style: none;
+  margin-bottom: 2rem;
+  flex-wrap: wrap;
+}
+
+.footer-links a {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.65rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--text-dim);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+.footer-links a:hover { color: var(--gold); }
+
+.footer-copy {
+  font-size: 0.85rem;
+  color: var(--text-dim);
+  opacity: 0.5;
+}
+
+/* ── ANIMATIONS ── */
+@keyframes fade-up {
+  from { opacity: 0; transform: translateY(24px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.reveal {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+.reveal.visible {
+  opacity: 1;
+  transform: none;
+}
+
+/* ── PATCH NOTES ── */
+.patchnotes {
+  margin-top: 2.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.patch {
+  border: 1px solid var(--border);
+  overflow: hidden;
+}
+
+.patch-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.2rem 1.8rem;
+  background: var(--panel);
+  cursor: pointer;
+  user-select: none;
+  transition: background 0.2s;
+}
+.patch-header:hover { background: rgba(255,255,255,0.03); }
+
+.patch-version {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--gold);
+}
+
+.patch-name {
+  font-family: 'Cinzel Decorative', serif;
+  font-size: 0.85rem;
+  color: var(--text-bright);
+  margin-left: 1rem;
+}
+
+.patch-date {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.62rem;
+  color: var(--text-dim);
+}
+
+.patch-arrow {
+  color: var(--text-dim);
+  transition: transform 0.3s;
+  font-size: 0.8rem;
+}
+
+.patch.open .patch-arrow { transform: rotate(180deg); }
+
+.patch-body {
+  display: none;
+  padding: 1.5rem 1.8rem;
+  border-top: 1px solid var(--border);
+}
+.patch.open .patch-body { display: block; }
+
+.patch-section {
+  margin-bottom: 1rem;
+}
+
+.patch-section-title {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.62rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--text-dim);
+  margin-bottom: 0.5rem;
+}
+
+.patch-section ul {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+}
+
+.patch-section li {
+  font-size: 0.95rem;
+  color: var(--text);
+  padding-left: 1.2rem;
+  position: relative;
+}
+
+.patch-section li::before {
+  content: '·';
+  position: absolute;
+  left: 0;
+  color: var(--gold-dim);
+}
+
+.patch-section.added li::before   { content: '+'; color: var(--jade-bright); }
+.patch-section.fixed li::before   { content: '✓'; color: #4a90e2; font-size: 0.7rem; top: 2px; }
+.patch-section.changed li::before { content: '~'; color: var(--gold-dim); }
+.patch-section.removed li::before { content: '-'; color: var(--crimson-bright); }
+
+/* Mobile */
+@media (max-width: 768px) {
+  nav { padding: 0 1rem; }
+  .nav-links { gap: 1.5rem; }
+  .nav-links a { font-size: 0.62rem; }
+  .lore-container { grid-template-columns: 1fr; }
+  .bug-layout { grid-template-columns: 1fr; }
+  .event-item { grid-template-columns: 60px 1fr; gap: 1rem; }
+  .event-badge { display: none; }
+  section { padding: 4rem 1.2rem; }
+}
 </style>
 </head>
 <body>
 
-<canvas id="particles"></canvas>
-<div class="grid-bg"></div>
-
 <!-- NAV -->
 <nav>
-  <a href="#hero" class="nav-logo">⚡ Éter Ancestral</a>
+  <a href="#" class="nav-logo" style="font-size:0.75rem;letter-spacing:0.08em">CAÇADORES DE ALMAS</a>
   <ul class="nav-links">
-    <li><a onclick="scrollTo('eventos')">Eventos</a></li>
-    <li><a onclick="scrollTo('historia')">História</a></li>
-    <li><a onclick="scrollTo('bugs')">Reportar<span class="notif-badge" id="nav-badge">0</span></a></li>
+    <li><a href="#updates">Updates</a></li>
+    <li><a href="#lore">História</a></li>
+    <li><a href="#events">Eventos</a></li>
+    <li><a href="#patchnotes">Patch Notes</a></li>
+    <li><a href="#bugs">Report Bug</a></li>
   </ul>
 </nav>
 
 <!-- HERO -->
-<section id="hero">
+<div class="hero">
   <div class="hero-bg"></div>
-  <div class="hero-orb"></div>
-  <p class="hero-eyecatch">Mundo das Almas</p>
-  <h1 class="hero-title">Éter Ancestral</h1>
-  <p class="hero-subtitle">O Julgamento Final</p>
-  <p class="hero-desc">Antes dos reinos, antes do tempo — havia apenas o Éter. E o Éter criou o mundo como um experimento. Agora, o experimento está chegando ao fim.</p>
-  <div class="hero-cta">
-    <a class="btn-primary" onclick="scrollTo('historia')">Descobrir a Verdade</a>
-    <a class="btn-secondary" onclick="scrollTo('eventos')">Próximos Eventos</a>
-  </div>
-  <div class="hero-scroll">
-    <span>Descer</span>
-    <div class="scroll-line"></div>
-  </div>
-</section>
 
-<!-- EVENTOS -->
-<section id="eventos">
-  <div class="section-header">
-    <span class="section-eyebrow">Atualizações do Mundo</span>
-    <h2 class="section-title">Eventos & Novidades</h2>
-    <div class="section-divider">
-      <div class="divider-line"></div>
-      <div class="divider-gem"></div>
-      <div class="divider-line right"></div>
-    </div>
-  </div>
-  <div class="events-grid">
-
-    <div class="event-card pve">
-      <span class="event-tag">PvE</span>
-      <div class="event-date">⏳ Em Breve</div>
-      <div class="event-title">Masmorras do Éter Corrompido</div>
-      <div class="event-desc">Cavernas antigas preenchidas pela essência do Vazio aguardam os Caçadores mais corajosos. Recompensas únicas e fragmentos de Éter Puro.</div>
-      <span class="event-status status-em-breve">Em Breve</span>
-    </div>
-
-    <div class="event-card pvp">
-      <span class="event-tag">PvP</span>
-      <div class="event-date">⏳ Em Breve</div>
-      <div class="event-title">Tribunal das Almas</div>
-      <div class="event-desc">Os Caçadores mais poderosos se enfrentam em arenas impregnadas de Éter. Apenas o mais digno receberá o título de Guardião do Mundo.</div>
-      <span class="event-status status-em-breve">Em Breve</span>
-    </div>
-
-    <div class="event-card novidade">
-      <span class="event-tag">Novidade</span>
-      <div class="event-date">📜 Atualização</div>
-      <div class="event-title">Classe: Exilado Redimido</div>
-      <div class="event-desc">Uma nova classe chega ao Mundo das Almas. Seres outrora banidos pelo Éter, corrompidos pelo Vazio — mas que escolheram resistir.</div>
-      <span class="event-status status-em-breve">Em Desenvolvimento</span>
-    </div>
-
-    <div class="event-card pve">
-      <span class="event-tag">PvE</span>
-      <div class="event-date">🔥 Ativo Agora</div>
-      <div class="event-title">Invasão dos Soldados Sem-Nome</div>
-      <div class="event-desc">O Vazio enviou hordas de almas corrompidas. Defenda os portais do mundo — ou torne-se mais um entre os esquecidos.</div>
-      <span class="event-status status-ativo">Ativo</span>
-    </div>
-
-    <div class="event-card novidade">
-      <span class="event-tag">Novidade</span>
-      <div class="event-date">⚡ Lore</div>
-      <div class="event-title">Os Tronos de Éter Revelados</div>
-      <div class="event-desc">Novos diálogos com a Monarquia disponíveis. Descubra o acordo secreto que os grandes reis fizeram para sobreviver ao Protocolo de Limpeza.</div>
-      <span class="event-status status-ativo">Disponível</span>
-    </div>
-
-    <div class="event-card pvp">
-      <span class="event-tag">PvP</span>
-      <div class="event-date">⏳ Em Breve</div>
-      <div class="event-title">Guerra das Facções</div>
-      <div class="event-desc">Guias as facções do mundo em batalhas épicas. Monarquia, Anciões ou Exilados — qual lado provará que merece existir?</div>
-      <span class="event-status status-em-breve">Em Breve</span>
-    </div>
-
-  </div>
-</section>
-
-<!-- HISTÓRIA -->
-<section id="historia">
-  <div class="section-header">
-    <span class="section-eyebrow">A Verdade do Mundo</span>
-    <h2 class="section-title">História</h2>
-    <div class="section-divider">
-      <div class="divider-line"></div>
-      <div class="divider-gem"></div>
-      <div class="divider-line right"></div>
-    </div>
+  <div class="hero-seal">
+    <svg viewBox="0 0 140 140" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <filter id="glow">
+          <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
+          <feMerge><feMergeNode in="coloredBlur"/><feMergeNode in="SourceGraphic"/></feMerge>
+        </filter>
+      </defs>
+      <!-- Outer ring -->
+      <circle cx="70" cy="70" r="65" fill="none" stroke="#c9a227" stroke-width="1" opacity="0.5" filter="url(#glow)"/>
+      <circle cx="70" cy="70" r="58" fill="none" stroke="#7a5f10" stroke-width="0.5" stroke-dasharray="4 3"/>
+      <!-- Inner geometric -->
+      <polygon points="70,20 118,47 118,93 70,120 22,93 22,47" fill="none" stroke="#c9a227" stroke-width="1.2" opacity="0.7" filter="url(#glow)"/>
+      <polygon points="70,35 105,55 105,85 70,105 35,85 35,55" fill="rgba(201,162,39,0.04)" stroke="#7a5f10" stroke-width="0.8"/>
+      <!-- Center eye -->
+      <ellipse cx="70" cy="70" rx="18" ry="12" fill="none" stroke="#c9a227" stroke-width="1.2" filter="url(#glow)"/>
+      <circle cx="70" cy="70" r="6" fill="rgba(201,162,39,0.3)" stroke="#c9a227" stroke-width="1" filter="url(#glow)"/>
+      <circle cx="70" cy="70" r="2.5" fill="#c9a227" filter="url(#glow)"/>
+      <!-- Rune marks -->
+      <line x1="70" y1="8" x2="70" y2="16" stroke="#c9a227" stroke-width="1.5" opacity="0.6"/>
+      <line x1="70" y1="124" x2="70" y2="132" stroke="#c9a227" stroke-width="1.5" opacity="0.6"/>
+      <line x1="8" y1="70" x2="16" y2="70" stroke="#c9a227" stroke-width="1.5" opacity="0.6"/>
+      <line x1="124" y1="70" x2="132" y2="70" stroke="#c9a227" stroke-width="1.5" opacity="0.6"/>
+    </svg>
   </div>
 
-  <div class="story-container">
-    <div class="story-intro">
-      No início, antes de reinos, criaturas ou tempo como é conhecido hoje, existia apenas o Éter Ancestral — uma consciência primordial responsável pela criação do Mundo das Almas. O mundo não foi criado por amor, nem por necessidade. Foi criado como um experimento.
-    </div>
+  <p class="hero-eyebrow">Portal Oficial — Roblox</p>
+  <h1 class="hero-title" style="font-size:clamp(2rem,7vw,5rem);letter-spacing:0.05em"><span>CAÇADORES</span><br>DE ALMAS</h1>
+  <p class="hero-subtitle"><em>Entre os mundos — o poder desperta</em></p>
 
-    <div class="story-chapter">
-      <span class="chapter-icon">⚡</span>
-      <div class="chapter-title">O Propósito do Éter</div>
-      <div class="chapter-text">O Éter Ancestral observou silenciosamente o desenvolvimento da vida durante milênios. Civilizações surgiram, evoluíram e desapareceram. Almas nasceram, lutaram, traíram, amaram e destruíram umas às outras repetidamente. Com o passar das eras, o criador chegou a uma conclusão fria e inevitável.</div>
-      <div class="chapter-quote">"A existência de almas imperfeitas é um erro que eu mesmo cometi."</div>
-    </div>
+  <div class="hero-ctas">
+    <a href="https://www.roblox.com" class="btn btn-gold" target="_blank">▶ Jogar no Roblox</a>
+    <a href="#bugs" class="btn btn-ghost">⚠ Reportar Bug</a>
+  </div>
+</div>
 
-    <div class="story-chapter crimson-border">
-      <span class="chapter-icon">🌑</span>
-      <div class="chapter-title">O Protocolo de Limpeza</div>
-      <div class="chapter-text">Sem ódio, sem raiva e sem sofrimento, o criador iniciou um processo conhecido como Protocolo de Limpeza — uma reinicialização total da criação. Aquilo que os habitantes chamam de Entidade do Vazio não é um invasor. É o próprio Éter executando sua decisão. O mundo não está sendo destruído por maldade. Está sendo corrigido.</div>
-    </div>
+<!-- UPDATES -->
+<section id="updates">
+  <p class="section-label reveal">Novidades</p>
+  <h2 class="section-title reveal">Últimas Atualizações</h2>
+  <p class="reveal" style="color:var(--text-dim);max-width:600px;">Acompanhe tudo que está acontecendo no mundo de Caçadores de Almas — novos conteúdos, eventos e correções.</p>
 
-    <div class="story-chapter gold-border">
-      <span class="chapter-icon">🧪</span>
-      <div class="chapter-title">O Papel dos Caçadores</div>
-      <div class="chapter-text">Os humanos chamados através do Chamado da Alma não foram escolhidos como heróis. Eles são os últimos dados do experimento. O Éter trouxe criaturas caóticas, imprevisíveis e imperfeitas para observar uma última variável: se nem os humanos conseguirem provar que almas possuem valor… então a limpeza sempre esteve correta. Cada batalha, escolha e sobrevivência é observada como parte do julgamento final.</div>
+  <div class="updates-grid reveal">
+    <div class="update-card type-update">
+      <span class="update-tag">Atualização</span>
+      <div class="update-date">Janeiro 2025</div>
+      <div class="update-title">Sistema de Guildas v2</div>
+      <div class="update-body">Novos uniformes por países, banco de guilda, sistema de contribuição e cargo de Co-Líder adicionados.</div>
     </div>
-
-    <div class="section-header" style="margin-top: 4rem; margin-bottom: 2rem;">
-      <span class="section-eyebrow">Inimigos do Mundo</span>
-      <h3 class="section-title" style="font-size: 1.8rem;">As Classes de Boss</h3>
+    <div class="update-card type-event">
+      <span class="update-tag">Evento</span>
+      <div class="update-date">Em Breve</div>
+      <div class="update-title">Invasão dos Espectros</div>
+      <div class="update-body">O Campo de Areia será tomado por ondas de Espectros Arcanos. Recompensas exclusivas para os maiores caçadores.</div>
     </div>
-
-    <div class="classes-grid">
-      <div class="class-card">
-        <div class="class-icon">🔱</div>
-        <div class="class-name">Monarquia</div>
-        <div class="class-motivation">Autopreservação</div>
-        <div class="class-desc">Os primeiros seres criados pelo Éter. Fizeram um acordo secreto: permitir que o Vazio consume as regiões mais fracas em troca de sobreviver.</div>
-        <span class="class-ally ally-rare">Aliado: Raramente</span>
-      </div>
-      <div class="class-card">
-        <div class="class-icon">🌿</div>
-        <div class="class-name">Anciões</div>
-        <div class="class-motivation">Fatalismo ou Desespero</div>
-        <div class="class-desc">Fragmentos vivos do Éter original. O peso de memórias de eras inteiras os levou à loucura. Derrotá-los é, muitas vezes, um ato de misericórdia.</div>
-        <span class="class-ally ally-sometimes">Aliado: Alguns</span>
-      </div>
-      <div class="class-card">
-        <div class="class-icon">⚔️</div>
-        <div class="class-name">Soldados</div>
-        <div class="class-motivation">Marionetes do Vazio</div>
-        <div class="class-desc">Caçadores de eras passadas que falharam. Não morreram — ficaram presos entre existência e vazio. O Vazio os preencheu com uma única ordem.</div>
-        <span class="class-ally ally-no">Aliado: Jamais</span>
-      </div>
-      <div class="class-card">
-        <div class="class-icon">🔥</div>
-        <div class="class-name">Exilados</div>
-        <div class="class-motivation">Raiva e Desconfiança</div>
-        <div class="class-desc">Tentaram enfrentar o Éter sozinhos. Foram derrotados e banidos. Expostos ao Vazio, deformaram — mas ainda desejam provar que existe esperança.</div>
-        <span class="class-ally ally-yes">Aliado: Sim</span>
-      </div>
-      <div class="class-card">
-        <div class="class-icon">🗡️</div>
-        <div class="class-name">Comandantes</div>
-        <div class="class-motivation">Convicção Filosófica</div>
-        <div class="class-desc">Conheceram toda a verdade e escolheram servir voluntariamente. Não atacam apenas com poder — atacam com argumentos devastadores.</div>
-        <span class="class-ally ally-no">Aliado: Jamais</span>
-      </div>
-      <div class="class-card" style="border-color: rgba(201,146,42,0.25); background: linear-gradient(135deg, rgba(30,20,5,0.7), rgba(10,8,2,0.9));">
-        <div class="class-icon">🌌</div>
-        <div class="class-name">O Éter</div>
-        <div class="class-motivation">Julgamento Final</div>
-        <div class="class-desc">Não surge como monstro — aparece como luz pura e voz serena. Utiliza cada escolha feita pelos Caçadores como evidência em seu tribunal.</div>
-        <span class="class-ally ally-no" style="border-color: rgba(201,146,42,0.4); color: var(--gold-bright);">Chefe Final</span>
-      </div>
+    <div class="update-card type-fix">
+      <span class="update-tag">Correção</span>
+      <div class="update-date">Janeiro 2025</div>
+      <div class="update-title">HP de Máscara ao Subir de Nível</div>
+      <div class="update-body">Corrigido bug onde o bônus de HP das máscaras e uniformes era removido ao subir de nível.</div>
     </div>
-
-    <div class="story-chapter gold-border" style="margin-top: 3rem;">
-      <span class="chapter-icon">🌌</span>
-      <div class="chapter-title">A Verdade Final</div>
-      <div class="chapter-text">O Éter pode ser derrotado. Mas não pela força. Apenas por uma alma capaz de provar, através de suas ações durante toda a jornada, que a imperfeição não é um erro. É aquilo que torna a existência digna de continuar.</div>
-      <div class="chapter-quote gold-quote">"Vocês foram o experimento mais interessante que já conduzi. Almas humanas, caóticas e contraditórias, sobrevivendo onde não deveriam. Fascinante. E mesmo assim… insuficiente."</div>
+    <div class="update-card type-news">
+      <span class="update-tag">Notícia</span>
+      <div class="update-date">Em Desenvolvimento</div>
+      <div class="update-title">Sistema de Dungeons</div>
+      <div class="update-body">O sistema de Dungeons está em desenvolvimento ativo. Espere raids de 4 jogadores, recompensas únicas e muito mais.</div>
+    </div>
+    <div class="update-card type-update">
+      <span class="update-tag">Atualização</span>
+      <div class="update-date">Janeiro 2025</div>
+      <div class="update-title">Haki do Rei</div>
+      <div class="update-body">O Haki do Rei foi adicionado ao jogo — stun em área de 120 studs, afetando tanto mobs quanto jogadores na zona PVP.</div>
+    </div>
+    <div class="update-card type-update">
+      <span class="update-tag">Atualização</span>
+      <div class="update-date">Janeiro 2025</div>
+      <div class="update-title">Sistema de Save Completo</div>
+      <div class="update-body">Agora todos os dados do jogador são salvos: XP, nível, skills, moedas, missões, máscaras, poderes e guilda.</div>
     </div>
   </div>
 </section>
 
-<!-- BUGS -->
+<div class="rune-divider reveal"><span>⟡</span></div>
+
+<!-- LORE -->
+<section id="lore">
+  <p class="section-label reveal">Universo</p>
+  <h2 class="section-title reveal">A História de Caçadores de Almas</h2>
+
+  <div class="lore-container">
+    <div class="lore-text reveal">
+
+      <h3 style="font-family:'Cinzel Decorative',serif;font-size:1rem;color:var(--gold);margin:0 0 1rem;letter-spacing:0.08em">⚡ O Éter Ancestral — O Verdadeiro Vilão</h3>
+
+      <p>No início, antes de reinos, criaturas ou tempo como é conhecido hoje, existia apenas o <em>Éter Ancestral</em> — uma consciência primordial responsável pela criação do Mundo das Almas.</p>
+
+      <p>O mundo não foi criado por amor, nem por necessidade. <strong style="color:var(--text-bright)">Foi criado como um experimento.</strong> O propósito do Éter era simples: observar se almas eram dignas de existir eternamente.</p>
+
+      <p>Durante milênios, o Éter observou silenciosamente o desenvolvimento da vida. Civilizações surgiram, evoluíram e desapareceram. Almas nasceram, lutaram, traíram, amaram e destruíram umas às outras repetidamente. Com o passar das eras, o criador chegou a uma conclusão fria e inevitável:</p>
+
+      <blockquote>"A existência de almas imperfeitas é um erro que eu mesmo cometi."<br><span style="font-size:0.85rem;opacity:0.6">— O Éter Ancestral</span></blockquote>
+
+      <p>Sem ódio, sem raiva e sem sofrimento, o criador iniciou o <em>Protocolo de Limpeza</em> — uma reinicialização total da criação. Aquilo que os habitantes chamam de <em>Entidade do Vazio</em> não é um invasor. É o próprio Éter executando sua decisão. O mundo não está sendo destruído por maldade. <strong style="color:var(--text-bright)">Está sendo corrigido.</strong></p>
+
+      <h3 style="font-family:'Cinzel Decorative',serif;font-size:1rem;color:var(--gold);margin:2.5rem 0 1rem;letter-spacing:0.08em">🧪 O Papel dos Caçadores</h3>
+
+      <p>Os humanos chamados para este mundo através do <em>Chamado da Alma</em> não foram escolhidos como heróis. <strong style="color:var(--text-bright)">Eles são os últimos dados do experimento.</strong></p>
+
+      <p>O Éter trouxe criaturas caóticas, imprevisíveis e imperfeitas para observar uma última variável: se nem os humanos conseguirem provar que almas possuem valor, então a limpeza sempre esteve correta. Cada batalha, cada escolha e cada sobrevivência de um Caçador de Almas é observada como parte do julgamento final.</p>
+
+      <h3 style="font-family:'Cinzel Decorative',serif;font-size:1rem;color:var(--gold);margin:2.5rem 0 1rem;letter-spacing:0.08em">🌑 O Julgamento Final</h3>
+
+      <p>Quando o Éter finalmente se manifesta, ele não surge como um monstro. Ele aparece como <em>luz pura e voz serena</em>. Sua primeira ação não é atacar. É agradecer.</p>
+
+      <blockquote>"Vocês foram o experimento mais interessante que já conduzi. Almas humanas, caóticas e contraditórias, sobrevivendo onde não deveriam. Fascinante. E mesmo assim… insuficiente."<br><span style="font-size:0.85rem;opacity:0.6">— O Éter Ancestral</span></blockquote>
+
+      <p>A batalha final é mais do que física. É um julgamento. O Éter utiliza cada escolha feita pelos Caçadores — aliados salvos, perdas, sacrifícios e decisões — como evidência em seu tribunal.</p>
+
+      <p>O Éter pode ser derrotado. Mas não pela força. Apenas por uma alma capaz de provar, através de suas ações durante toda a jornada, que a imperfeição não é um erro — <em>é aquilo que torna a existência digna de continuar.</em></p>
+
+    </div>
+
+    <div class="lore-aside reveal">
+
+      <div class="lore-panel">
+        <div class="lore-panel-title">🏹 Sua Classe</div>
+        <ul class="faction-list">
+          <li><span class="faction-icon">🩸</span><div><strong style="color:var(--text-bright)">Hunter / Caçador de Almas</strong><br><span style="font-size:0.85rem">Humano convocado pelo Chamado da Alma. Usa habilidades únicas, Expansões de Domínio e Haki. Existe apenas uma classe — porque a questão do Éter é sobre a alma humana. Só humanos podem responder.</span></div></li>
+        </ul>
+      </div>
+
+      <div class="lore-panel">
+        <div class="lore-panel-title">👑 Classes de Boss</div>
+        <ul class="faction-list">
+          <li><span class="faction-icon">🔱</span><div><strong style="color:var(--text-bright)">Monarquia</strong><br><span style="font-size:0.82rem;color:var(--text-dim)">Fizeram acordo secreto com o Vazio para sobreviver.</span><br><span style="font-size:0.78rem;font-style:italic;color:var(--gold-dim)">"Eu apenas escolhi o lado que ainda existe."</span></div></li>
+          <li><span class="faction-icon">🌿</span><div><strong style="color:var(--text-bright)">Anciões</strong><br><span style="font-size:0.82rem;color:var(--text-dim)">Fragmentos vivos do Éter. Loucos pelo peso de milênios.</span><br><span style="font-size:0.78rem;font-style:italic;color:var(--gold-dim)">"Até a esperança dói de lembrar."</span></div></li>
+          <li><span class="faction-icon">⚔</span><div><strong style="color:var(--text-bright)">Soldados</strong><br><span style="font-size:0.82rem;color:var(--text-dim)">Caçadores de eras passadas que falharam. Sem alma própria.</span><br><span style="font-size:0.78rem;font-style:italic;color:var(--gold-dim)">"...me ajuda."</span></div></li>
+          <li><span class="faction-icon">🔥</span><div><strong style="color:var(--text-bright)">Exilados</strong><br><span style="font-size:0.82rem;color:var(--text-dim)">Resistiram ao Éter e foram banidos. Podem ser aliados.</span><br><span style="font-size:0.78rem;font-style:italic;color:var(--gold-dim)">"O mundo apagou tudo isso de mim."</span></div></li>
+          <li><span class="faction-icon">🗡</span><div><strong style="color:var(--text-bright)">Comandantes</strong><br><span style="font-size:0.82rem;color:var(--text-dim)">Servos voluntários. Atacam com poder e com argumentos.</span><br><span style="font-size:0.78rem;font-style:italic;color:var(--gold-dim)">"Alguma delas merecia mais do que você?"</span></div></li>
+          <li><span class="faction-icon">🌑</span><div><strong style="color:var(--text-bright)">O Éter</strong><br><span style="font-size:0.82rem;color:var(--text-dim)">O criador. O vilão final. A luz pura que quer apagar tudo.</span></div></li>
+        </ul>
+      </div>
+
+      <div class="lore-panel">
+        <div class="lore-panel-title">📊 Podem ser aliados?</div>
+        <ul class="faction-list">
+          <li><span class="faction-icon">🔱</span><div style="display:flex;justify-content:space-between;width:100%"><span style="color:var(--text-dim)">Monarquia</span><span style="color:var(--gold);font-size:0.8rem">Raramente</span></div></li>
+          <li><span class="faction-icon">🌿</span><div style="display:flex;justify-content:space-between;width:100%"><span style="color:var(--text-dim)">Anciões</span><span style="color:var(--gold);font-size:0.8rem">Alguns</span></div></li>
+          <li><span class="faction-icon">⚔</span><div style="display:flex;justify-content:space-between;width:100%"><span style="color:var(--text-dim)">Soldados</span><span style="color:var(--crimson-bright);font-size:0.8rem">Nunca</span></div></li>
+          <li><span class="faction-icon">🔥</span><div style="display:flex;justify-content:space-between;width:100%"><span style="color:var(--text-dim)">Exilados</span><span style="color:var(--jade-bright);font-size:0.8rem">Sim</span></div></li>
+          <li><span class="faction-icon">🗡</span><div style="display:flex;justify-content:space-between;width:100%"><span style="color:var(--text-dim)">Comandantes</span><span style="color:var(--crimson-bright);font-size:0.8rem">Jamais</span></div></li>
+        </ul>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<div class="rune-divider reveal"><span>⟡</span></div>
+
+<!-- EVENTS -->
+<section id="events">
+  <p class="section-label reveal">Calendário</p>
+  <h2 class="section-title reveal">Eventos</h2>
+
+  <div class="events-list reveal">
+    <div class="event-item active">
+      <div class="event-date-block">
+        <div class="event-day">—</div>
+        <div class="event-month">Ativo</div>
+      </div>
+      <div class="event-info">
+        <div class="event-title">Teste Beta Fechado</div>
+        <div class="event-desc">Servidor aberto para testes. Reporte bugs e ajude a construir Caçadores de Almas.</div>
+      </div>
+      <span class="event-badge badge-active">● Ao Vivo</span>
+    </div>
+    <div class="event-item">
+      <div class="event-date-block">
+        <div class="event-day">??</div>
+        <div class="event-month">Em Breve</div>
+      </div>
+      <div class="event-info">
+        <div class="event-title">Invasão dos Espectros</div>
+        <div class="event-desc">Ondas de Espectros tomam o Campo de Areia. Caçadores são convocados.</div>
+      </div>
+      <span class="event-badge badge-soon">Em Breve</span>
+    </div>
+    <div class="event-item">
+      <div class="event-date-block">
+        <div class="event-day">??</div>
+        <div class="event-month">Em Breve</div>
+      </div>
+      <div class="event-info">
+        <div class="event-title">Lançamento das Dungeons</div>
+        <div class="event-desc">Primeiro dungeon de Caçadores de Almas abre as portas. Grupos de 4 jogadores. Recompensas lendárias.</div>
+      </div>
+      <span class="event-badge badge-soon">Em Breve</span>
+    </div>
+    <div class="event-item">
+      <div class="event-date-block">
+        <div class="event-day">??</div>
+        <div class="event-month">Em Breve</div>
+      </div>
+      <div class="event-info">
+        <div class="event-title">Guerra de Guildas</div>
+        <div class="event-desc">Guildas competem por controle de territórios. Uniformes exclusivos para vencedores.</div>
+      </div>
+      <span class="event-badge badge-soon">Em Breve</span>
+    </div>
+  </div>
+</section>
+
+<div class="rune-divider reveal"><span>⟡</span></div>
+
+<!-- PATCH NOTES -->
+<section id="patchnotes">
+  <p class="section-label reveal">Histórico</p>
+  <h2 class="section-title reveal">Patch Notes</h2>
+
+  <div class="patchnotes reveal">
+
+    <div class="patch open">
+      <div class="patch-header" onclick="this.parentElement.classList.toggle('open')">
+        <span>
+          <span class="patch-version">v0.3.0</span>
+          <span class="patch-name">O Rei Desperta</span>
+        </span>
+        <span style="display:flex;align-items:center;gap:1rem">
+          <span class="patch-date">Janeiro 2025</span>
+          <span class="patch-arrow">▼</span>
+        </span>
+      </div>
+      <div class="patch-body">
+        <div class="patch-section added">
+          <div class="patch-section-title">✦ Adicionado</div>
+          <ul>
+            <li>Haki do Rei — stun em área de 120 studs, escalável por estrelas (★0→★5)</li>
+            <li>Sistema de PVP aprimorado — Haki e Expansões de Domínio afetam jogadores na zona</li>
+            <li>Save completo — XP, level, skills, moedas e missões agora são salvos</li>
+            <li>Menu Hambúrguer com roda radial (7 sistemas acessíveis)</li>
+            <li>Abas Loja e Raid (Em Breve) no menu de Guilda</li>
+          </ul>
+        </div>
+        <div class="patch-section fixed">
+          <div class="patch-section-title">✓ Corrigido</div>
+          <ul>
+            <li>HP de máscara e uniforme não era preservado ao subir de nível</li>
+            <li>ATK de máscara não aplicava dano corretamente</li>
+            <li>XP de missões não era dado quando câmera estava longe do NPC</li>
+            <li>Membros da mesma guilda podiam se atacar na zona PVP</li>
+            <li>Ícone de olho acima de inimigos stunados pelo Haki do Rei removido</li>
+          </ul>
+        </div>
+        <div class="patch-section changed">
+          <div class="patch-section-title">~ Alterado</div>
+          <ul>
+            <li>XP máximo por operação aumentado (removido cap de 9999)</li>
+            <li>Jogador renasce no spawn padrão em vez do local de morte</li>
+            <li>Raio do Haki do Rei ajustado para 120 studs (era variável por estrela)</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="patch">
+      <div class="patch-header" onclick="this.parentElement.classList.toggle('open')">
+        <span>
+          <span class="patch-version">v0.2.0</span>
+          <span class="patch-name">A Guilda e o Uniforme</span>
+        </span>
+        <span style="display:flex;align-items:center;gap:1rem">
+          <span class="patch-date">Dezembro 2024</span>
+          <span class="patch-arrow">▼</span>
+        </span>
+      </div>
+      <div class="patch-body">
+        <div class="patch-section added">
+          <div class="patch-section-title">✦ Adicionado</div>
+          <ul>
+            <li>Sistema de Guildas completo — criar, convidar, expulsar, promover</li>
+            <li>10 uniformes de países (Brasil, EUA, Japão, Alemanha e mais)</li>
+            <li>Banco de Guilda com sistema de contribuição (+5% bônus de moedas)</li>
+            <li>Sistema de Expansão de Domínio com 5 domínios únicos</li>
+            <li>Poderes de Outro Mundo — fragmentos, estrelas, equipar/desequipar</li>
+          </ul>
+        </div>
+        <div class="patch-section fixed">
+          <div class="patch-section-title">✓ Corrigido</div>
+          <ul>
+            <li>Mobs não davam XP ao morrer por script próprio</li>
+            <li>Chat começava aberto e ocupava espaço desnecessário</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="patch">
+      <div class="patch-header" onclick="this.parentElement.classList.toggle('open')">
+        <span>
+          <span class="patch-version">v0.1.0</span>
+          <span class="patch-name">O Início</span>
+        </span>
+        <span style="display:flex;align-items:center;gap:1rem">
+          <span class="patch-date">Novembro 2024</span>
+          <span class="patch-arrow">▼</span>
+        </span>
+      </div>
+      <div class="patch-body">
+        <div class="patch-section added">
+          <div class="patch-section-title">✦ Adicionado</div>
+          <ul>
+            <li>Lançamento inicial do servidor</li>
+            <li>Sistema de combate com parry, skills e lock-on</li>
+            <li>Sistema de máscaras com 8 tipos e skills únicas</li>
+            <li>NPC Mestre com sistema de missões em cadeia</li>
+            <li>Sistema de servidores SA1–SA50</li>
+            <li>Zona PVP com proteção de equipe e guilda</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<div class="rune-divider reveal"><span>⟡</span></div>
+
+<!-- BUG REPORT -->
 <section id="bugs">
-  <div class="section-header">
-    <span class="section-eyebrow">Suporte ao Mundo</span>
-    <h2 class="section-title">Reportar Problema</h2>
-    <div class="section-divider">
-      <div class="divider-line"></div>
-      <div class="divider-gem"></div>
-      <div class="divider-line right"></div>
-    </div>
-  </div>
+  <p class="section-label reveal">Suporte</p>
+  <h2 class="section-title reveal">Reportar Bug</h2>
+  <p class="reveal" style="color:var(--text-dim);max-width:600px;margin-bottom:0;">Encontrou um problema? Nos conte. Cada report ajuda a melhorar Caçadores de Almas.</p>
 
-  <div class="bug-container">
-    <div class="bug-form" id="bug-form-wrap">
-      <div class="form-group">
-        <label class="form-label">Seu Nick no Jogo</label>
-        <input class="form-input" id="f-nick" type="text" placeholder="Ex: CaçadorDaAlma">
+  <div class="bug-layout">
+    <div class="bug-form reveal">
+      <form id="bugForm" onsubmit="submitBug(event)">
+        <div class="form-group">
+          <label class="form-label" for="playerName">Seu Username no Roblox</label>
+          <input class="form-input" type="text" id="playerName" placeholder="ex: Caçadores de AlmasPlayer123" required>
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="bugCategory">Categoria</label>
+          <select class="form-select" id="bugCategory" required>
+            <option value="" disabled selected>Selecione a categoria</option>
+            <option value="combate">⚔ Combate / Habilidades</option>
+            <option value="guilda">🏰 Sistema de Guilda</option>
+            <option value="mascara">😷 Máscaras</option>
+            <option value="poderes">🌀 Poderes / Expansão de Domínio</option>
+            <option value="missao">📜 Missões</option>
+            <option value="save">💾 Save / Dados perdidos</option>
+            <option value="pvp">⚔ Zona PVP</option>
+            <option value="performance">📉 Performance / Lag</option>
+            <option value="outro">🔧 Outro</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="bugTitle">Título do Bug</label>
+          <input class="form-input" type="text" id="bugTitle" placeholder="Resumo curto do problema" required>
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="bugDesc">Descrição Detalhada</label>
+          <textarea class="form-textarea" id="bugDesc" placeholder="O que aconteceu? O que você estava fazendo? Acontece sempre ou às vezes?" required></textarea>
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="bugSteps">Como Reproduzir (opcional)</label>
+          <textarea class="form-textarea" id="bugSteps" style="min-height:80px" placeholder="1. Fui até a zona PVP&#10;2. Usei o Haki do Rei&#10;3. O jogo travou"></textarea>
+        </div>
+        <button class="btn btn-gold btn-submit" type="submit">⚠ Enviar Report</button>
+        <div class="form-status" id="formStatus"></div>
+      </form>
+    </div>
+
+    <div class="bug-aside reveal">
+      <div class="bug-tip">
+        <div class="bug-tip-title">📋 Dicas para um bom report</div>
+        <ul>
+          <li>Descreva exatamente o que aconteceu, não apenas "não funciona"</li>
+          <li>Mencione se acontece sempre ou só às vezes</li>
+          <li>Diga qual sistema estava usando (guilda, combate, etc.)</li>
+          <li>Se possível, explique como reproduzir o bug</li>
+          <li>Prints ou vídeos ajudam muito — mencione no campo de descrição</li>
+        </ul>
       </div>
-      <div class="form-group">
-        <label class="form-label">Tipo de Relato</label>
-        <select class="form-select" id="f-tipo">
-          <option value="">— Selecionar —</option>
-          <option value="bug">🐛 Bug / Glitch</option>
-          <option value="lag">⚡ Lag / Travamento</option>
-          <option value="sugestao">💡 Sugestão</option>
-          <option value="outro">📜 Outro</option>
-        </select>
+      <div class="bug-tip">
+        <div class="bug-tip-title">⏱ Tempo de Resposta</div>
+        <ul>
+          <li>Bugs críticos (dados perdidos): respondido em até 24h</li>
+          <li>Bugs de gameplay: revisado em até 72h</li>
+          <li>Melhorias e sugestões: compiladas semanalmente</li>
+        </ul>
       </div>
-      <div class="form-group">
-        <label class="form-label">Descrição do Problema</label>
-        <textarea class="form-textarea" id="f-desc" placeholder="Descreva o que aconteceu, onde ocorreu, e como reproduzir o problema..."></textarea>
-      </div>
-      <button class="btn-submit" onclick="submitReport()">⚡ Enviar Relato</button>
-      <div class="form-success" id="form-success">
-        <div class="success-icon">✨</div>
-        <div class="success-title">Relato Enviado com Sucesso</div>
-        <p>Sua mensagem foi registrada nos Arquivos do Éter. Os administradores serão notificados.</p>
+      <div class="bug-tip">
+        <div class="bug-tip-title">🏆 Hall dos Colaboradores</div>
+        <ul>
+          <li>Jogadores que encontrarem bugs críticos ganham recompensas no jogo</li>
+          <li>Os melhores reports são destacados nas patch notes</li>
+        </ul>
       </div>
     </div>
   </div>
@@ -1267,256 +1264,243 @@
 
 <!-- FOOTER -->
 <footer>
-  <div class="footer-logo">⚡ Éter Ancestral</div>
-  <div class="footer-text">O Protocolo de Limpeza não pode ser detido. Mas a imperfeição pode provar seu valor.</div>
-  <button class="footer-admin" onclick="showAdminLogin()">⚙ Painel Admin</button>
+  <span class="footer-logo">CAÇADORES DE ALMAS</span>
+  <ul class="footer-links">
+    <li><a href="#updates">Updates</a></li>
+    <li><a href="#lore">História</a></li>
+    <li><a href="#events">Eventos</a></li>
+    <li><a href="#patchnotes">Patch Notes</a></li>
+    <li><a href="#bugs">Report Bug</a></li>
+    <li><a href="https://www.roblox.com" target="_blank">Roblox</a></li>
+  </ul>
+  <p class="footer-copy">© 2025 Caçadores de Almas — Todos os direitos reservados · Fã-site não oficial do Roblox</p>
 </footer>
 
-<!-- ADMIN LOGIN -->
-<div id="admin-login" style="display: none;">
-  <div class="login-box">
-    <div class="login-title">⚙ Painel do Administrador</div>
-    <p class="login-sub">Apenas os Guardiões do Éter podem acessar este local.</p>
-    <input class="login-input" type="password" id="admin-pass" placeholder="••••••••" onkeydown="if(event.key==='Enter')checkAdminPass()">
-    <div class="login-error" id="login-error">Senha incorreta. O Éter rejeita sua alma.</div>
-    <button class="btn-login" onclick="checkAdminPass()">Acessar</button><br>
-    <button class="btn-cancel-login" onclick="closeAdminLogin()">Cancelar</button>
-  </div>
-</div>
-
-<!-- ADMIN PANEL -->
-<div id="admin-panel">
-  <div class="admin-header">
-    <div class="admin-title">⚙ Painel dos Guardiões</div>
-    <button class="btn-close-admin" onclick="closeAdminPanel()">✕ Fechar</button>
-  </div>
-  <div class="admin-stats">
-    <div class="stat-card">
-      <span class="stat-number" id="stat-total">0</span>
-      <span class="stat-label">Total de Relatos</span>
-    </div>
-    <div class="stat-card">
-      <span class="stat-number" id="stat-bugs">0</span>
-      <span class="stat-label">Bugs</span>
-    </div>
-    <div class="stat-card">
-      <span class="stat-number" id="stat-lags">0</span>
-      <span class="stat-label">Lags</span>
-    </div>
-  </div>
-  <div class="reports-list" id="reports-list"></div>
-  <button class="admin-btn-clear" onclick="clearReports()">🗑 Limpar Todos os Relatos</button>
-</div>
-
-<!-- TOAST -->
-<div class="toast" id="toast">
-  <div class="toast-title" id="toast-title"></div>
-  <div id="toast-msg"></div>
-</div>
-
 <script>
-// ── PARTICLES ──
-const canvas = document.getElementById('particles');
-const ctx = canvas.getContext('2d');
-let particles = [];
-
-function resizeCanvas() {
-  canvas.width = window.innerWidth;
-  canvas.height = window.innerHeight;
-}
-
-function createParticles() {
-  particles = [];
-  for (let i = 0; i < 80; i++) {
-    particles.push({
-      x: Math.random() * canvas.width,
-      y: Math.random() * canvas.height,
-      r: Math.random() * 1.5 + 0.2,
-      vx: (Math.random() - 0.5) * 0.15,
-      vy: (Math.random() - 0.5) * 0.15,
-      alpha: Math.random() * 0.5 + 0.1,
-      color: Math.random() > 0.7 ? '#c9922a' : '#2a5fbd'
-    });
-  }
-}
-
-function animateParticles() {
-  ctx.clearRect(0, 0, canvas.width, canvas.height);
-  particles.forEach(p => {
-    p.x += p.vx;
-    p.y += p.vy;
-    if (p.x < 0) p.x = canvas.width;
-    if (p.x > canvas.width) p.x = 0;
-    if (p.y < 0) p.y = canvas.height;
-    if (p.y > canvas.height) p.y = 0;
-    ctx.beginPath();
-    ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
-    ctx.fillStyle = p.color;
-    ctx.globalAlpha = p.alpha;
-    ctx.fill();
-    ctx.globalAlpha = 1;
+// Scroll reveal
+const reveals = document.querySelectorAll('.reveal');
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach((entry, i) => {
+    if (entry.isIntersecting) {
+      setTimeout(() => entry.target.classList.add('visible'), i * 60);
+    }
   });
-  requestAnimationFrame(animateParticles);
-}
+}, { threshold: 0.1 });
+reveals.forEach(el => observer.observe(el));
 
-window.addEventListener('resize', () => { resizeCanvas(); createParticles(); });
-resizeCanvas();
-createParticles();
-animateParticles();
+// Bug form
+async function submitBug(e) {
+  e.preventDefault();
+  const btn    = document.querySelector('.btn-submit');
+  const status = document.getElementById('formStatus');
 
-// ── SCROLL ──
-function scrollTo(id) {
-  document.getElementById(id).scrollIntoView({ behavior: 'smooth' });
-}
+  const playerName = document.getElementById('playerName').value.trim();
+  const category   = document.getElementById('bugCategory').value;
+  const title      = document.getElementById('bugTitle').value.trim();
+  const desc       = document.getElementById('bugDesc').value.trim();
+  const steps      = document.getElementById('bugSteps').value.trim() || 'Não informado';
 
-// ── STORAGE ──
-const STORAGE_KEY = 'eter_reports';
-const ADMIN_PASS = 'eter2024'; // Troque esta senha!
-
-function getReports() {
-  return JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
-}
-
-function saveReports(r) {
-  localStorage.setItem(STORAGE_KEY, JSON.stringify(r));
-}
-
-// ── BADGE ──
-function updateBadge() {
-  const reports = getReports();
-  const badge = document.getElementById('nav-badge');
-  if (reports.length > 0) {
-    badge.style.display = 'inline-flex';
-    badge.textContent = reports.length;
-  } else {
-    badge.style.display = 'none';
-  }
-}
-
-// ── TOAST ──
-function showToast(title, msg, isError = false) {
-  const t = document.getElementById('toast');
-  document.getElementById('toast-title').textContent = title;
-  document.getElementById('toast-msg').textContent = msg;
-  t.style.borderColor = isError ? '#e03030' : '#4d8eff';
-  t.style.color = isError ? '#ff7070' : '#7fb3ff';
-  t.classList.add('show');
-  setTimeout(() => t.classList.remove('show'), 4000);
-}
-
-// ── SUBMIT REPORT ──
-function submitReport() {
-  const nick = document.getElementById('f-nick').value.trim();
-  const tipo = document.getElementById('f-tipo').value;
-  const desc = document.getElementById('f-desc').value.trim();
-
-  if (!nick) { showToast('Erro', 'Informe seu nick no jogo.', true); return; }
-  if (!tipo) { showToast('Erro', 'Selecione o tipo de relato.', true); return; }
-  if (!desc) { showToast('Erro', 'Descreva o problema.', true); return; }
-
-  const report = {
-    id: Date.now(),
-    nick,
-    tipo,
-    desc,
-    date: new Date().toLocaleString('pt-BR')
+  // Mapa de categorias legíveis
+  const categoryMap = {
+    combate:'⚔ Combate / Habilidades', guilda:'🏰 Sistema de Guilda',
+    mascara:'😷 Máscaras', poderes:'🌀 Poderes / Expansão de Domínio',
+    missao:'📜 Missões', save:'💾 Save / Dados perdidos',
+    pvp:'⚔ Zona PVP', performance:'📉 Performance / Lag', outro:'🔧 Outro'
   };
 
-  const reports = getReports();
-  reports.unshift(report);
-  saveReports(reports);
-  updateBadge();
+  btn.textContent = '⏳ Enviando...';
+  btn.disabled = true;
+  status.className = 'form-status';
+  status.textContent = '';
 
-  // Show success state
-  const form = document.getElementById('bug-form-wrap');
-  const successEl = document.getElementById('form-success');
-  
-  // Hide inputs, show success
-  Array.from(form.children).forEach(c => { if (c.id !== 'form-success') c.style.display = 'none'; });
-  successEl.style.display = 'block';
+  // Salva no localStorage sempre
+  const report = {
+    id: Date.now(),
+    player_name: playerName,
+    category: categoryMap[category] || category,
+    bug_title: title,
+    bug_desc: desc,
+    bug_steps: steps,
+    sent_at: new Date().toLocaleString('pt-BR', { timeZone: 'America/Sao_Paulo' }),
+    lido: false
+  };
+  const saved = JSON.parse(localStorage.getItem('cda_reports') || '[]');
+  saved.unshift(report);
+  localStorage.setItem('cda_reports', JSON.stringify(saved));
 
-  showToast('✨ Relato Registrado', `${nick}, seu relato foi salvo com sucesso!`);
+  // Tenta enviar por email (silencioso se falhar)
+  try {
+    await emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, {
+      player_name: playerName,
+      category: report.category,
+      bug_title: title,
+      bug_desc: desc,
+      bug_steps: steps,
+      sent_at: report.sent_at
+    });
+  } catch (err) { console.warn('EmailJS:', err); }
 
-  // Reset after 4s
-  setTimeout(() => {
-    Array.from(form.children).forEach(c => { if (c.id !== 'form-success') c.style.display = ''; });
-    successEl.style.display = 'none';
-    document.getElementById('f-nick').value = '';
-    document.getElementById('f-tipo').value = '';
-    document.getElementById('f-desc').value = '';
-  }, 5000);
+  status.className = 'form-status success';
+  status.textContent = '✓ Report enviado! Obrigado, ' + playerName + '. Vamos investigar em breve.';
+  document.getElementById('bugForm').reset();
+  btn.textContent = '⚠ Enviar Report';
+  btn.disabled = false;
 }
 
-// ── ADMIN ──
-function showAdminLogin() {
-  const el = document.getElementById('admin-login');
-  el.style.display = 'flex';
-  setTimeout(() => document.getElementById('admin-pass').focus(), 100);
-}
+// Nav highlight on scroll
+const sections = document.querySelectorAll('section[id]');
+const navLinks = document.querySelectorAll('.nav-links a');
+window.addEventListener('scroll', () => {
+  let current = '';
+  sections.forEach(s => {
+    if (window.scrollY >= s.offsetTop - 100) current = s.id;
+  });
+  navLinks.forEach(a => {
+    a.style.color = a.getAttribute('href') === '#' + current ? 'var(--gold)' : '';
+  });
+});
 
-function closeAdminLogin() {
-  document.getElementById('admin-login').style.display = 'none';
-  document.getElementById('admin-pass').value = '';
-  document.getElementById('login-error').style.display = 'none';
-}
+// ── PAINEL ADMIN ──
+const ADMIN_PASS = 'GDRDB';
+let adminLogado = false;
 
-function checkAdminPass() {
-  const pass = document.getElementById('admin-pass').value;
-  if (pass === ADMIN_PASS) {
-    closeAdminLogin();
-    openAdminPanel();
+function abrirAdmin() {
+  document.getElementById('adminOverlay').style.display = 'flex';
+  if (!adminLogado) {
+    document.getElementById('adminLogin').style.display = 'flex';
+    document.getElementById('adminPanel').style.display = 'none';
   } else {
-    document.getElementById('login-error').style.display = 'block';
-    document.getElementById('admin-pass').value = '';
+    mostrarReports();
   }
 }
 
-function openAdminPanel() {
-  const reports = getReports();
-  document.getElementById('admin-panel').style.display = 'block';
-  document.body.style.overflow = 'hidden';
+function fecharAdmin() {
+  document.getElementById('adminOverlay').style.display = 'none';
+}
 
-  const bugs = reports.filter(r => r.tipo === 'bug').length;
-  const lags = reports.filter(r => r.tipo === 'lag').length;
-  document.getElementById('stat-total').textContent = reports.length;
-  document.getElementById('stat-bugs').textContent = bugs;
-  document.getElementById('stat-lags').textContent = lags;
+function loginAdmin() {
+  const senha = document.getElementById('adminSenha').value;
+  if (senha === ADMIN_PASS) {
+    adminLogado = true;
+    document.getElementById('adminLogin').style.display = 'none';
+    document.getElementById('adminPanel').style.display = 'block';
+    document.getElementById('adminErro').textContent = '';
+    mostrarReports();
+  } else {
+    document.getElementById('adminErro').textContent = '✗ Senha incorreta';
+    document.getElementById('adminSenha').value = '';
+  }
+}
 
-  const list = document.getElementById('reports-list');
+function mostrarReports() {
+  const reports = JSON.parse(localStorage.getItem('cda_reports') || '[]');
+  const container = document.getElementById('reportsList');
+  const counter = document.getElementById('reportsCount');
+  const naoLidos = reports.filter(r => !r.lido).length;
+  counter.textContent = reports.length + ' report(s) — ' + naoLidos + ' não lido(s)';
+
   if (reports.length === 0) {
-    list.innerHTML = '<div class="no-reports">Nenhum relato registrado ainda.</div>';
+    container.innerHTML = '<p style="color:var(--text-dim);text-align:center;padding:2rem">Nenhum report ainda.</p>';
     return;
   }
 
-  const typeLabels = { bug: 'Bug', lag: 'Lag', sugestao: 'Sugestão', outro: 'Outro' };
-  list.innerHTML = reports.map(r => `
-    <div class="report-item tipo-${r.tipo}">
-      <div class="report-meta">
-        <span class="report-type ${r.tipo}">${typeLabels[r.tipo] || r.tipo}</span>
-        <span class="report-nick">@${r.nick}</span>
-        <span class="report-date">${r.date}</span>
+  container.innerHTML = reports.map((r, i) => `
+    <div class="admin-report ${r.lido ? 'lido' : 'novo'}" id="rep-${r.id}">
+      <div class="admin-report-header">
+        <span class="admin-badge ${r.lido ? '' : 'badge-novo'}">${r.lido ? 'Lido' : '● Novo'}</span>
+        <span class="admin-category">${r.category}</span>
+        <span class="admin-date">${r.sent_at}</span>
+        <button onclick="marcarLido(${r.id})" style="margin-left:auto;background:rgba(201,162,39,0.1);border:1px solid var(--gold-dim);color:var(--gold);padding:0.2rem 0.7rem;font-size:0.65rem;cursor:pointer;font-family:'JetBrains Mono',monospace">${r.lido ? 'Reabrir' : 'Marcar lido'}</button>
+        <button onclick="deletarReport(${r.id})" style="background:rgba(139,0,0,0.15);border:1px solid var(--crimson);color:var(--crimson-bright);padding:0.2rem 0.7rem;font-size:0.65rem;cursor:pointer;font-family:'JetBrains Mono',monospace">Deletar</button>
       </div>
-      <div class="report-text">${r.desc.replace(/</g,'&lt;').replace(/>/g,'&gt;')}</div>
+      <div class="admin-report-title">${r.bug_title}</div>
+      <div class="admin-report-player">👤 ${r.player_name}</div>
+      <div class="admin-report-body"><strong>Descrição:</strong><br>${r.bug_desc}</div>
+      ${r.bug_steps !== 'Não informado' ? `<div class="admin-report-body" style="margin-top:0.5rem"><strong>Como reproduzir:</strong><br>${r.bug_steps}</div>` : ''}
     </div>
   `).join('');
 }
 
-function closeAdminPanel() {
-  document.getElementById('admin-panel').style.display = 'none';
-  document.body.style.overflow = '';
+function marcarLido(id) {
+  const reports = JSON.parse(localStorage.getItem('cda_reports') || '[]');
+  const idx = reports.findIndex(r => r.id === id);
+  if (idx !== -1) { reports[idx].lido = !reports[idx].lido; }
+  localStorage.setItem('cda_reports', JSON.stringify(reports));
+  mostrarReports();
 }
 
-function clearReports() {
-  if (confirm('Tem certeza que deseja apagar todos os relatos?')) {
-    saveReports([]);
-    updateBadge();
-    closeAdminPanel();
-    showToast('✓ Limpo', 'Todos os relatos foram removidos.');
-  }
+function deletarReport(id) {
+  if (!confirm('Deletar este report?')) return;
+  const reports = JSON.parse(localStorage.getItem('cda_reports') || '[]').filter(r => r.id !== id);
+  localStorage.setItem('cda_reports', JSON.stringify(reports));
+  mostrarReports();
 }
 
-// Init
-updateBadge();
+function limparTodos() {
+  if (!confirm('Deletar TODOS os reports? Isso não pode ser desfeito.')) return;
+  localStorage.removeItem('cda_reports');
+  mostrarReports();
+}
+
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape') fecharAdmin();
+  if (document.getElementById('adminSenha') === document.activeElement && e.key === 'Enter') loginAdmin();
+});
+</script>
+
+<!-- ADMIN OVERLAY -->
+<div id="adminOverlay" style="display:none;position:fixed;inset:0;background:rgba(2,1,10,0.95);z-index:9998;align-items:center;justify-content:center;backdrop-filter:blur(8px)">
+
+  <!-- LOGIN -->
+  <div id="adminLogin" style="display:flex;flex-direction:column;align-items:center;gap:1.2rem;background:var(--panel);border:1px solid var(--border);padding:3rem;min-width:320px;position:relative">
+    <button onclick="fecharAdmin()" style="position:absolute;top:1rem;right:1rem;background:none;border:none;color:var(--text-dim);font-size:1.2rem;cursor:pointer">✕</button>
+    <div style="font-family:'Cinzel Decorative',serif;font-size:1rem;color:var(--gold);letter-spacing:0.1em">PAINEL ADMIN</div>
+    <div style="font-family:'JetBrains Mono',monospace;font-size:0.65rem;color:var(--text-dim);letter-spacing:0.2em">CAÇADORES DE ALMAS</div>
+    <input id="adminSenha" type="password" placeholder="Senha" style="width:100%;background:rgba(255,255,255,0.03);border:1px solid var(--border);color:var(--text);padding:0.85rem 1rem;font-family:'Crimson Pro',serif;font-size:1rem;outline:none;letter-spacing:0.2em">
+    <button onclick="loginAdmin()" style="width:100%;padding:0.85rem;background:linear-gradient(135deg,#8a6200,#c9a227,#8a6200);color:var(--void);font-family:'JetBrains Mono',monospace;font-size:0.75rem;letter-spacing:0.15em;border:none;cursor:pointer;font-weight:700">ENTRAR</button>
+    <div id="adminErro" style="color:var(--crimson-bright);font-family:'JetBrains Mono',monospace;font-size:0.65rem;letter-spacing:0.1em"></div>
+  </div>
+
+  <!-- PAINEL -->
+  <div id="adminPanel" style="display:none;width:min(900px,95vw);max-height:90vh;overflow-y:auto;background:var(--panel);border:1px solid var(--border);padding:2rem;position:relative">
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:1.5rem;flex-wrap:wrap;gap:1rem">
+      <div>
+        <div style="font-family:'Cinzel Decorative',serif;font-size:1rem;color:var(--gold)">PAINEL ADMIN</div>
+        <div id="reportsCount" style="font-family:'JetBrains Mono',monospace;font-size:0.65rem;color:var(--text-dim);margin-top:0.3rem"></div>
+      </div>
+      <div style="display:flex;gap:0.8rem">
+        <button onclick="limparTodos()" style="background:rgba(139,0,0,0.15);border:1px solid var(--crimson);color:var(--crimson-bright);padding:0.5rem 1rem;font-size:0.65rem;cursor:pointer;font-family:'JetBrains Mono',monospace;letter-spacing:0.1em">Limpar tudo</button>
+        <button onclick="fecharAdmin()" style="background:rgba(255,255,255,0.05);border:1px solid var(--border);color:var(--text-dim);padding:0.5rem 1rem;font-size:0.65rem;cursor:pointer;font-family:'JetBrains Mono',monospace">Fechar</button>
+      </div>
+    </div>
+    <div id="reportsList"></div>
+  </div>
+</div>
+
+<style>
+.admin-report { background:var(--deep);border:1px solid var(--border);padding:1.5rem;margin-bottom:1rem; }
+.admin-report.novo { border-left:3px solid var(--crimson-bright); }
+.admin-report.lido { opacity:0.6; }
+.admin-report-header { display:flex;align-items:center;gap:0.8rem;flex-wrap:wrap;margin-bottom:0.8rem; }
+.admin-badge { font-family:'JetBrains Mono',monospace;font-size:0.6rem;letter-spacing:0.15em;padding:0.2rem 0.6rem;border:1px solid var(--border);color:var(--text-dim); }
+.badge-novo { background:rgba(204,34,34,0.15);border-color:var(--crimson);color:var(--crimson-bright); }
+.admin-category { font-family:'JetBrains Mono',monospace;font-size:0.62rem;color:var(--gold);letter-spacing:0.1em; }
+.admin-date { font-family:'JetBrains Mono',monospace;font-size:0.6rem;color:var(--text-dim); }
+.admin-report-title { font-family:'Cinzel Decorative',serif;font-size:0.95rem;color:var(--text-bright);margin-bottom:0.4rem; }
+.admin-report-player { font-family:'JetBrains Mono',monospace;font-size:0.68rem;color:var(--text-dim);margin-bottom:0.8rem; }
+.admin-report-body { font-size:0.95rem;color:var(--text);line-height:1.6;white-space:pre-wrap; }
+</style>
+
+<!-- Botão secreto no footer -->
+<script>
+// Clique 5x no copyright para abrir o admin
+let clickCount = 0, clickTimer;
+document.querySelector('.footer-copy').addEventListener('click', () => {
+  clickCount++;
+  clearTimeout(clickTimer);
+  clickTimer = setTimeout(() => clickCount = 0, 2000);
+  if (clickCount >= 5) { clickCount = 0; abrirAdmin(); }
+});
 </script>
 </body>
 </html>
