@@ -1505,5 +1505,48 @@ document.querySelector('.footer-copy').addEventListener('click', () => {
   if (clickCount >= 5) { clickCount = 0; abrirAdmin(); }
 });
 </script>
+
+<!-- ADMIN OVERLAY -->
+<div id="adminOverlay" style="display:none;position:fixed;inset:0;background:rgba(2,1,10,0.95);z-index:9998;align-items:center;justify-content:center;backdrop-filter:blur(8px)">
+
+  <!-- LOGIN -->
+  <div id="adminLogin" style="display:flex;flex-direction:column;align-items:center;gap:1.2rem;background:var(--panel);border:1px solid var(--border);padding:3rem;min-width:320px;position:relative">
+    <button onclick="fecharAdmin()" style="position:absolute;top:1rem;right:1rem;background:none;border:none;color:var(--text-dim);font-size:1.2rem;cursor:pointer">✕</button>
+    <div style="font-family:'Cinzel Decorative',serif;font-size:1rem;color:var(--gold);letter-spacing:0.1em">PAINEL ADMIN</div>
+    <div style="font-family:'JetBrains Mono',monospace;font-size:0.65rem;color:var(--text-dim);letter-spacing:0.2em">CAÇADORES DE ALMAS</div>
+    <input id="adminSenha" type="password" placeholder="Senha" style="width:100%;background:rgba(255,255,255,0.03);border:1px solid var(--border);color:var(--text);padding:0.85rem 1rem;font-family:'Crimson Pro',serif;font-size:1rem;outline:none;letter-spacing:0.2em">
+    <button onclick="loginAdmin()" style="width:100%;padding:0.85rem;background:linear-gradient(135deg,#8a6200,#c9a227,#8a6200);color:var(--void);font-family:'JetBrains Mono',monospace;font-size:0.75rem;letter-spacing:0.15em;border:none;cursor:pointer;font-weight:700">ENTRAR</button>
+    <div id="adminErro" style="color:var(--crimson-bright);font-family:'JetBrains Mono',monospace;font-size:0.65rem;letter-spacing:0.1em"></div>
+  </div>
+
+  <!-- PAINEL -->
+  <div id="adminPanel" style="display:none;width:min(900px,95vw);max-height:90vh;overflow-y:auto;background:var(--panel);border:1px solid var(--border);padding:2rem;position:relative">
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:1.5rem;flex-wrap:wrap;gap:1rem">
+      <div>
+        <div style="font-family:'Cinzel Decorative',serif;font-size:1rem;color:var(--gold)">PAINEL ADMIN</div>
+        <div id="reportsCount" style="font-family:'JetBrains Mono',monospace;font-size:0.65rem;color:var(--text-dim);margin-top:0.3rem"></div>
+      </div>
+      <div style="display:flex;gap:0.8rem">
+        <button onclick="limparTodos()" style="background:rgba(139,0,0,0.15);border:1px solid var(--crimson);color:var(--crimson-bright);padding:0.5rem 1rem;font-size:0.65rem;cursor:pointer;font-family:'JetBrains Mono',monospace;letter-spacing:0.1em">Limpar tudo</button>
+        <button onclick="fecharAdmin()" style="background:rgba(255,255,255,0.05);border:1px solid var(--border);color:var(--text-dim);padding:0.5rem 1rem;font-size:0.65rem;cursor:pointer;font-family:'JetBrains Mono',monospace">Fechar</button>
+      </div>
+    </div>
+    <div id="reportsList"></div>
+  </div>
+</div>
+
+<style>
+.admin-report { background:var(--deep);border:1px solid var(--border);padding:1.5rem;margin-bottom:1rem; }
+.admin-report.novo { border-left:3px solid var(--crimson-bright); }
+.admin-report.lido { opacity:0.6; }
+.admin-report-header { display:flex;align-items:center;gap:0.8rem;flex-wrap:wrap;margin-bottom:0.8rem; }
+.admin-badge { font-family:'JetBrains Mono',monospace;font-size:0.6rem;letter-spacing:0.15em;padding:0.2rem 0.6rem;border:1px solid var(--border);color:var(--text-dim); }
+.badge-novo { background:rgba(204,34,34,0.15);border-color:var(--crimson);color:var(--crimson-bright); }
+.admin-category { font-family:'JetBrains Mono',monospace;font-size:0.62rem;color:var(--gold);letter-spacing:0.1em; }
+.admin-date { font-family:'JetBrains Mono',monospace;font-size:0.6rem;color:var(--text-dim); }
+.admin-report-title { font-family:'Cinzel Decorative',serif;font-size:0.95rem;color:var(--text-bright);margin-bottom:0.4rem; }
+.admin-report-player { font-family:'JetBrains Mono',monospace;font-size:0.68rem;color:var(--text-dim);margin-bottom:0.8rem; }
+.admin-report-body { font-size:0.95rem;color:var(--text);line-height:1.6;white-space:pre-wrap; }
+</style>
 </body>
 </html>
